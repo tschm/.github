@@ -1,0 +1,13 @@
+{
+    "name": "tschm hello world",
+    "description": "tschm CI starter workflow.",
+    "iconName": "example-icon",
+    "categories": [
+        "Python"
+    ],
+    "filePatterns": [
+        "package.json$",
+        "^Dockerfile",
+        ".*\\.md$"
+    ]
+}
