@@ -32,21 +32,6 @@ runs:
        virtualenvs-in-project: true
        installer-parallel: true
 
-    - name: Install jupyterbook
-      shell: bash
-      run: |
-        poetry run pip install --no-cache-dir jupyter-book
-
-    - name: Install pytest
-      shell: bash
-      run: |     
-          poetry run pip install --no-cache-dir \
-                      pytest=="7.2.0" \
-                      pytest-cov=="4.0.0" \
-                      pytest-html=="3.1.1" \
-                      pytest-random-order=="1.0.4"
-
-
     - name: Load cached venv
       id: cached-poetry-dependencies
       uses: actions/cache@v3
