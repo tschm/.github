@@ -1,0 +1,42 @@
+name: Setup the Python Environment
+
+description: "Construct a Python environment for ci/cd using poetry"
+
+on:
+  workflow_call:
+    inputs:
+      os:
+        description: 'OS'
+        type: string
+        required: true
+      python-version:
+        description: 'Python version'
+        type: string
+        required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ inputs.python-version }}
+
+    - name: Install Poetry
+      uses: snok/install-poetry@v1
+      with:
+       # It's easier to cache if a virtual environment within the project is used
+       virtualenvs-create: true
+       virtualenvs-in-project: true
+       installer-parallel: true
+
+    - name: Load cached venv
+      id: cached-poetry-dependencies
+      uses: actions/cache@v3
+      with:
+        path: .venv
+        key: venv-${{ inputs.os }}-${{ inputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+
+    - name: Install project
+      shell: bash
+      run: poetry install --no-interaction
