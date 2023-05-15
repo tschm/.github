@@ -21,6 +21,11 @@ on:
         description: 'Source folder'
         type: string
         required: true
+      kernel:
+        description: 'Jupyter kernel'
+        type: string
+        required: true
+
       GITHUB_TOKEN:
         required: true
 
@@ -46,7 +51,7 @@ runs:
         shell: bash
         run: |
           poetry run pip install jupyter-book
-          poetry run python -m ipykernel install --user --name="simulator"
+          poetry run python -m ipykernel install --user --name=${{ inputs.kernel }}
 
       # Build the book
       - name: Build the book
