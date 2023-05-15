@@ -29,6 +29,7 @@ runs:
         python-version: "${{ inputs.python-version }}"
       
     - name: Change version in pyproject.toml
+      shell: bash
       run: |
          poetry version ${{  github.ref_name }}
          poetry build
@@ -38,6 +39,7 @@ runs:
       uses: tschm/token-mint-action@v1.0.2
 
     - name: Publish the package with poetry
+      shell: bash
       run: |
          poetry publish -u __token__ -p '${{ steps.mint.outputs.api-token }}'
 
