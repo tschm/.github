@@ -1,0 +1,22 @@
+name: Build LaTeX document
+
+on: [push]
+
+jobs:
+  build_paper:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: cov_pred_finance.tex
+          working_directory: paper
+
+      - name: Upload document
+        uses: actions/upload-artifact@v3
+        with:
+          name: PDF
+          path: paper/cov_pred_finance.pdf
