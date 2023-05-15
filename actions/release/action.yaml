@@ -17,10 +17,10 @@ on:
 runs:
   using: "composite"
 
-  permissions:
-    # This permission is required for trusted publishing.
-    id-token: write
-    contents: read
+  #permissions:
+  #  # This permission is required for trusted publishing.
+  #  id-token: write
+  #  contents: read
   
   steps:  
     - uses: ./.github/actions/setup-environment@main
