@@ -21,9 +21,11 @@ on:
         description: 'Source folder'
         type: string
         required: true
-    secrets:
-      token:
+      GITHUB_TOKEN:
         required: true
+
+# on secrets
+# https://stackoverflow:com/questions/70098241/using-secrets-in-composite-actions-github
 
 runs:
     using: "composite"
@@ -84,5 +86,5 @@ runs:
       - name: GitHub Pages action
         uses: peaceiris/actions-gh-pages@v3.6.1
         with:
-          github_token: ${{ secrets.token }}
+          github_token: ${{ inputs.GITHUB_TOKEN }}
           publish_dir: book/_build/html
