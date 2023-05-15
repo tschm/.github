@@ -1,0 +1,85 @@
+name: Build the Jupyter Book
+
+description: "Build jupyter book"
+
+on:
+  workflow_call:
+    inputs:
+      os:
+        description: 'OS'
+        type: string
+        required: true
+      python-version:
+        description: 'Python version'
+        type: string
+        required: true
+      sphinx-folder:
+        description: 'Sphinx folder'
+        type: string
+        required: true
+      source-folder:
+        description: 'Source folder'
+        type: string
+        required: true
+
+runs:
+    using: "composite"
+    steps:
+      - uses: cvxgrp/.github/actions/dependencies@main
+        with:
+          os: ${{ runner.os }}
+          python-version: "${{ inputs.python-version }}"
+          source-folder: "${{ inputs.source-folder }}"
+
+      - uses: cvxgrp/.github/actions/sphinx@main
+        with:
+          os: ${{ runner.os }}
+          python-version: "${{ inputs.python-version }}"
+          sphinx-folder: "${{ inputs.sphinx-folder }}"
+
+      - name: Install jupyterbook
+        shell: bash
+        run: |
+          poetry run pip install jupyter-book
+          poetry run python -m ipykernel install --user --name="simulator"
+
+      # Build the book
+      - name: Build the book
+        shell: bash
+        run: |
+          poetry run jupyter-book clean book
+          poetry run jupyter-book build book
+
+      # Download the counting
+      - name: Download count results
+        uses: actions/download-artifact@v3
+        with:
+          name: count
+          path: book/_build/html/artifacts/lines
+
+      # Download the sphinx artifact
+      - name: Download Sphinx page
+        uses: actions/download-artifact@v3
+        with:
+          name: sphinx
+          path: book/_build/html/artifacts/sphinx
+
+      # Download the dependencies artifact
+      - name: Download the dependencies file
+        uses: actions/download-artifact@v3
+        with:
+          name: dependencies
+          path: book/_build/html/artifacts/build
+
+      # Check uploads
+      - name: Inspect upload
+        shell: bash
+        run : |
+          tree book/_build/html/artifacts
+
+      # Push the book's HTML to github-pages
+      - name: GitHub Pages action
+        uses: peaceiris/actions-gh-pages@v3.6.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: book/_build/html
