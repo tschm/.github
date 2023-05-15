@@ -1,0 +1,39 @@
+name: Release
+
+description: "Release with poetry"
+
+on:
+  workflow_call:
+    inputs:
+      os:
+        description: 'OS'
+        type: string
+        required: true
+      python-version:
+        description: 'Python version'
+        type: string
+        required: true
+
+runs:
+  using: "composite"
+
+  steps:  
+    - uses: cvxgrp/.github/actions/setup-environment@main
+      with:
+        os: ${{ runner.os }}
+        python-version: "${{ inputs.python-version }}"
+      
+    - name: Change version in pyproject.toml
+      shell: bash
+      run: |
+         poetry version ${{  github.ref_name }}
+         poetry build
+      
+    - name: Mint token
+      id: mint
+      uses: tschm/token-mint-action@v1.0.2
+
+    - name: Publish the package with poetry
+      shell: bash
+      run: |
+         poetry publish -u __token__ -p '${{ steps.mint.outputs.api-token }}'
