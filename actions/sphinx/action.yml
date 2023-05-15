@@ -1,0 +1,49 @@
+name: Build sphinx documentation
+
+description: "Build sphinx documentation"
+
+on:
+  workflow_call:
+    inputs:
+      os:
+        description: 'OS'
+        type: string
+        required: true
+      python-version:
+        description: 'Python version'
+        type: string
+        required: true
+      sphinx-folder:
+        description: 'Sphinx folder'
+        type: string
+        required: true
+
+
+runs:
+  using: "composite"
+  steps:
+      - uses: cvxgrp/.github/actions/setup-environment@main
+        with:
+          os: ${{ runner.os }}
+          python-version: "${{ inputs.python-version }}"
+
+      - name: Install sphinx
+        shell: bash
+        run: |
+          poetry run pip install --no-cache-dir \
+                     sphinx==5.0.2 \
+                     sphinx-autoapi==1.8.4 \
+                     sphinx-rtd-theme==1.0.0 \
+                     recommonmark==0.7.1
+
+      - name: Build sphinx
+        shell: bash
+        run: |
+          mkdir -p artifacts/sphinx
+          poetry run sphinx-build -b html ${{ inputs.sphinx-folder }} artifacts/sphinx
+
+      - name: Archive sphinx documentation
+        uses: actions/upload-artifact@v3
+        with:
+          name: sphinx
+          path: artifacts/sphinx
