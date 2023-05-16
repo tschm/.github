@@ -23,7 +23,7 @@ runs:
   #  contents: read
   
   steps:  
-    - uses: tschm/tschm/.github/actions/setup-environment@main
+    - uses: tschm/.github/actions/setup-environment@main
       with:
         os: ${{ runner.os }}
         python-version: "${{ inputs.python-version }}"
