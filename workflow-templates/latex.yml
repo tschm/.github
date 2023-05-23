@@ -8,18 +8,40 @@ on:
 jobs:
   build_paper:
     runs-on: ubuntu-latest
-
+    
     steps:
-      - uses: actions/checkout@v3
+      - name: Set up Git repository
+        uses: actions/checkout@v3
 
-      - name: Compile LaTeX document
-        uses: xu-cheng/latex-action@v2
+      - uses: actions/cache@v3
+        name: Tectonic Cache
         with:
-          root_file: cov_pred_finance.tex
-          working_directory: paper
+          path: ~/.cache/Tectonic
+          key: ${{ runner.os }}-tectonic-${{ hashFiles('**/*.tex') }}
+          restore-keys: |
+            ${{ runner.os }}-tectonic-
 
-      - name: Upload document
+      - uses: wtfjoke/setup-tectonic@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run Tectonic
+        run: tectonic paper/XXX Filename.tex XXX
+
+      - name: Upload pdf
         uses: actions/upload-artifact@v3
         with:
-          name: PDF
-          path: paper/cov_pred_finance.pdf
+          name: paper
+          path: paper/XXX Filename.pdf XXX
+
+      - name: Move document
+        run: |
+          mkdir publish
+          mv paper/XXX Filename.pdf XXX publish/XXX Filename.pdf XXX          
+
+      # Push the paper folder to the github pages
+      - name: GitHub Pages action
+        uses: JamesIves/github-pages-deploy-action@v4.2.2
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: publish  # The folder the action should deploy.
