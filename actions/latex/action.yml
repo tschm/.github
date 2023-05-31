@@ -2,6 +2,14 @@ name: Compile a LaTeX document
 
 description: "Compile a LaTeX document and upload it"
 
+on:
+  workflow_call:
+    inputs:
+      paper:
+        description: 'paper'
+        type: string
+        required: true
+
 runs:
   using: "composite"
   steps:
