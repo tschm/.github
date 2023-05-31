@@ -30,16 +30,11 @@ runs:
           mkdir publish
           tectonic --outdir publish ${{ paper }}
       
-      #- name: Upload pdf
-      #  uses: actions/upload-artifact@v3
-      #  with:
-      #    name: paper
-      #    path: ${{ paper }}.pdf
-      
       - name: Move document
         run: |
-          # mkdir publish
+          ls -all publish
           mv publish/*.pdf publish/paper.pdf
+          ls -all publish
           
       # Push the paper folder to the github pages
       - name: GitHub Pages action
