@@ -29,12 +29,6 @@ runs:
         run: |
           mkdir publish
           tectonic --outdir publish ${{ paper }}
-      
-      - name: Move document
-        run: |
-          ls -all publish
-          mv publish/*.pdf publish/paper.pdf
-          ls -all publish
           
       # Push the paper folder to the github pages
       - name: GitHub Pages action
