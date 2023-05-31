@@ -2,3 +2,41 @@ name: Compile a LaTeX document
 
 description: "Compile a LaTeX document and upload it"
 
+runs:
+  using: "composite"
+  steps:
+      - uses: actions/cache@v3
+        name: Tectonic Cache
+        with:
+          path: ~/.cache/Tectonic
+          key: ${{ runner.os }}-tectonic-${{ hashFiles('**/*.tex') }}
+          restore-keys: |
+            ${{ runner.os }}-tectonic-
+      
+      - uses: wtfjoke/setup-tectonic@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Run Tectonic
+        run: |
+          mkdir publish
+          tectonic --outdir publish ${{ paper }}
+      
+      #- name: Upload pdf
+      #  uses: actions/upload-artifact@v3
+      #  with:
+      #    name: paper
+      #    path: ${{ paper }}.pdf
+      
+      - name: Move document
+        run: |
+          # mkdir publish
+          mv publish/*.pdf publish/paper.pdf
+          
+      # Push the paper folder to the github pages
+      - name: GitHub Pages action
+        uses: JamesIves/github-pages-deploy-action@v4.2.2
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: publish  # The folder the action should deploy.
+
