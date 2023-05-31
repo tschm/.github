@@ -9,6 +9,9 @@ on:
         description: 'paper'
         type: string
         required: true
+      
+      GITHUB_TOKEN:
+        required: true
 
 runs:
   using: "composite"
@@ -23,13 +26,13 @@ runs:
       
       - uses: wtfjoke/setup-tectonic@v2
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ inputs.GITHUB_TOKEN }}
       
       - name: Run Tectonic
         shell: bash
         run: |
           mkdir publish
-          tectonic --outdir publish ${{ paper }}
+          tectonic --outdir publish ${{ inputs.paper }}
           
       # Push the paper folder to the github pages
       - name: GitHub Pages action
