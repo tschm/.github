@@ -50,3 +50,6 @@ runs:
         with:
           name: tests
           path: artifacts/tests
+          
+      - name: Coveralls GitHub Action
+        uses: coverallsapp/github-action@v2
