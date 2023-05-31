@@ -1,2 +1,4 @@
 name: Compile a LaTeX document
 
+description: "Compile a LaTeX document and upload it"
+
