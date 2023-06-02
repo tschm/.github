@@ -51,5 +51,6 @@ runs:
           name: tests
           path: artifacts/tests
           
-      - name: Coveralls GitHub Action
-        uses: coverallsapp/github-action@v2
+      # works currently only for public repos
+      # - name: Coveralls GitHub Action
+      #   uses: coverallsapp/github-action@v2
