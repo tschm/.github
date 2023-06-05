@@ -31,7 +31,7 @@ runs:
       - name: Run Tectonic
         shell: bash
         run: |
-          mkdir publish
+          mkdir -p publish
           tectonic --outdir publish ${{ inputs.paper }}
           
       # Push the paper folder to the github pages
