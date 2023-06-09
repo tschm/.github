@@ -27,6 +27,7 @@ runs:
       - uses: wtfjoke/setup-tectonic@v2
         with:
           github-token: ${{ inputs.GITHUB_TOKEN }}
+          biber-version: 2.16
       
       - name: Run Tectonic
         shell: bash
