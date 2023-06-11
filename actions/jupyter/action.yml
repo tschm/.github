@@ -8,14 +8,14 @@ on:
       python-version:
         description: 'Python version'
         type: string
-        required: true
+        required: false
         default: '3.10'
       kernel:
         description: 'Jupyter kernel'
         type: string
-        required: true
+        required: false
+        default: 'cvx'
         
-
 runs:
     using: "composite"
     steps:
@@ -27,7 +27,7 @@ runs:
         shell: bash
         run: |
           poetry run pip install jupyter-book
-          poetry run python -m ipykernel install --user --name=${{ inputs.kernel }}
+          poetry run python -m ipykernel install --user --name=${{ inputs.kernel || 'cvx' }}
 
       # Build the book
       - name: Build the book
