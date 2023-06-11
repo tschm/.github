@@ -29,7 +29,7 @@ runs:
       - name: Install jupyterbook
         shell: bash
         run: |
-          poetry run pip install jupyter-book
+          # poetry run pip install jupyter-book
           poetry run python -m ipykernel install --user --name=${{ inputs.kernel }}
 
       # Build the book
