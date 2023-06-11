@@ -19,6 +19,7 @@ runs:
   using: "composite"
   steps:
     - name: echo
+      shell: bash
       run: 
         echo ${{ inputs.python-version }}
         echo ${{ inputs.python-version.default}}
