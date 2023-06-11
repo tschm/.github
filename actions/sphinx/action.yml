@@ -5,10 +5,10 @@ description: "Build sphinx documentation"
 on:
   workflow_call:
     inputs:
-      os:
-        description: 'OS'
-        type: string
-        required: true
+      #os:
+      #  description: 'OS'
+      #  type: string
+      #  required: true
       python-version:
         description: 'Python version'
         type: string
