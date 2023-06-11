@@ -13,10 +13,10 @@ on:
         description: 'Python version'
         type: string
         required: true
-      sphinx-folder:
-        description: 'Sphinx folder'
-        type: string
-        required: true
+      #sphinx-folder:
+      #  description: 'Sphinx folder'
+      #  type: string
+      #  required: true
       source-folder:
         description: 'Source folder'
         type: string
@@ -47,16 +47,16 @@ runs:
           python-version: "${{ inputs.python-version }}"
           source-folder: "${{ inputs.source-folder }}"
 
-      - uses: cvxgrp/.github/actions/sphinx@main
-        with:
-          os: ${{ runner.os }}
-          python-version: "${{ inputs.python-version }}"
-          sphinx-folder: "${{ inputs.sphinx-folder }}"
+      #- uses: cvxgrp/.github/actions/sphinx@main
+      #  with:
+      #    os: ${{ runner.os }}
+      #    python-version: "${{ inputs.python-version }}"
+      #    sphinx-folder: "${{ inputs.sphinx-folder }}"
      
-      - uses: cvxgrp/.github/actions/test@main
-        with:
-          os: ${{ runner.os }}          
-          python-version: "${{ inputs.python-version }}"
+      #- uses: cvxgrp/.github/actions/test@main
+      #  with:
+      #    os: ${{ runner.os }}          
+      #    python-version: "${{ inputs.python-version }}"
       
       - name: Install jupyterbook
         shell: bash
