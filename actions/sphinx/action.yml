@@ -39,6 +39,7 @@ runs:
         shell: bash
         run: |
           mkdir -p artifacts/sphinx
+          echo ${{ inputs.sphinx-folder }}
           poetry run sphinx-build -b html ${{ inputs.sphinx-folder }} artifacts/sphinx
 
       - name: Archive sphinx documentation
