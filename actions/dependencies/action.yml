@@ -5,18 +5,11 @@ description: "Construct dependency tree"
 on:
   workflow_call:
     inputs:
-      os:
-        description: 'OS'
-        type: string
-        required: true
       python-version:
         description: 'Python version'
         type: string
-        required: true
-      source-folder:
-        description: 'Source folder'
-        type: string
-        required: true
+        required: false
+        default: '3.10'
 
 runs:
     using: "composite"
@@ -24,8 +17,7 @@ runs:
 
       - uses: cvxgrp/.github/actions/setup-environment@main
         with:
-          os: ${{ runner.os }}
-          python-version: "${{ inputs.python-version }}"
+          python-version: "${{ inputs.python-version || '3.10' }}"
 
       - name: Export dependencies
         shell: bash
