@@ -35,29 +35,22 @@ runs:
       - name: Run tests
         shell: bash
         run : |
-          mkdir -p t/artifacts/tests/coverage
-          mkdir -p t/artifacts/tests/html-coverage
-          mkdir -p t/artifacts/tests/html-report
+          mkdir -p artifacts/tests/coverage
+          mkdir -p artifacts/tests/html-coverage
+          mkdir -p artifacts/tests/html-report
           
           poetry run pytest --cov=cvx --random-order --verbose \
-                            --html=t/artifacts/tests/html-report/report.html \
-                            --cov-report xml:t/artifacts/tests/coverage/coverage.xml \
-                            --cov-report html:t/artifacts/tests/html-coverage \
+                            --html=artifacts/tests/html-report/report.html \
+                            --cov-report xml:artifacts/tests/coverage/coverage.xml \
+                            --cov-report html:artifacts/tests/html-coverage \
                             tests/
 
       - name: Archive tests results
         uses: actions/upload-artifact@v3
         with:
           name: tests
-          path: t/artifacts/tests
+          path: artifacts/tests
       
-      - name: GitHub Pages action
-        uses: JamesIves/github-pages-deploy-action@v4.2.2
-        with:
-          branch: gh-pages           # The branch the action should deploy to.
-          folder: t                  # The folder the action should deploy.
-
-
       # works currently only for public repos
       # - name: Coveralls GitHub Action
       #   uses: coverallsapp/github-action@v2
