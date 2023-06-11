@@ -5,25 +5,27 @@ description: "Perform a test"
 on:
   workflow_call:
     inputs:
-      os:
-        description: 'OS'
-        type: string
-        required: true
+      #os:
+      #  description: 'OS'
+      #  type: string
+      #  required: true
       python-version:
         description: 'Python version'
         type: string
         required: true
+        default: '3.10'
       source-folder:
         description: 'Source folder'
         type: string
         required: true
-
+        default: 'cvx'
+        
 runs:
   using: "composite"
   steps:
       - uses: cvxgrp/.github/actions/setup-environment@main
         with:
-          os: ${{ inputs.os }}
+          os: ${{ runner.os }}
           python-version: ${{ inputs.python-version }}
 
       - name: Install pytest
