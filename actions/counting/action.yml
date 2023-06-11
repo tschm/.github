@@ -39,3 +39,4 @@ runs:
         with:
           name: count
           path: artifacts/lines
+          retention-days: 1
