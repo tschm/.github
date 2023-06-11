@@ -42,7 +42,7 @@ runs:
       - name: Archive book
         uses: actions/upload-artifact@v3
         with:
-          name: book
-          path: book/_build/html
+          name: jbook
+          path: book/_build/html/
           retention-days: 1
           
