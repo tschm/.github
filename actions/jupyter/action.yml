@@ -44,4 +44,5 @@ runs:
         with:
           name: book
           path: book/_build/html
-         
+          retention-days: 1
+          
