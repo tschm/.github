@@ -29,7 +29,7 @@ runs:
       - name: Install jupyterbook
         shell: bash
         run: |
-          # poetry run pip install jupyter-book
+          poetry run pip install jupyter-book
           poetry run python -m ipykernel install --user --name=${{ inputs.kernel }}
 
       # Build the book
@@ -42,7 +42,7 @@ runs:
       - name: Archive book
         uses: actions/upload-artifact@v3
         with:
-          name: jbook
+          name: book
           path: book/_build/html/
           retention-days: 1
           
