@@ -47,7 +47,10 @@ runs:
                             --cov-report xml:artifacts/tests/coverage/coverage.xml \
                             --cov-report html:artifacts/tests/html-coverage \
                             tests/
-
+          
+          # I want to upload the result to gh-pages, hence this file disturbs
+          rm artifacts/tests/html-coverage/.gitignore
+          
       - name: Archive tests results
         uses: actions/upload-artifact@v3
         with:
