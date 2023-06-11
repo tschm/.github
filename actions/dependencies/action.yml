@@ -1,6 +1,6 @@
 name: Analyse Dependencies
 
-description: "Construct dependency tree and line count"
+description: "Construct dependency tree"
 
 on:
   workflow_call:
@@ -39,16 +39,4 @@ runs:
         with:
           name: dependencies
           path: artifacts/build
-
-      - name: count
-        shell: bash
-        run: |
-            pip install pygount==1.5.1
-            mkdir -p artifacts/lines
-            pygount --format=summary --out=artifacts/lines/lines.txt ${{ inputs.source-folder }}
-
-      - name: Archive counts
-        uses: actions/upload-artifact@v3
-        with:
-          name: count
-          path: artifacts/lines
+    
