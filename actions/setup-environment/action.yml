@@ -21,14 +21,15 @@ runs:
     - name: echo
       shell: bash
       run: 
-        echo ${{ inputs.python-version }}
-        echo ${{ inputs.python-version.default}}
-        echo ${ ${{ inputs.python-version }} :=${{ inputs.python-version.default }} }
+        #echo ${{ inputs.python-version }}
+        #echo ${{ inputs.python-version.default }}
+        #echo ${ ${{ inputs.python-version }}:=${{ inputs.python-version.default }} }
+        echo ${{ inputs.python-version || '3.10' }}
         
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: ${ ${{ inputs.python-version }} :=${{ inputs.python-version.default }} }
+        python-version: ${ ${{ inputs.python-version }}:=${{ inputs.python-version.default }} }
         
     - name: Install Poetry
       uses: snok/install-poetry@v1
