@@ -21,7 +21,7 @@ runs:
   steps:
       - uses: cvxgrp/.github/actions/setup-environment@main
         with:
-          python-version: ${{ inputs.python-version }}
+          python-version: ${{ inputs.python-version || '3.10' }}
           
       - name: Install sphinx
         shell: bash
@@ -35,10 +35,10 @@ runs:
       - name: Build sphinx
         shell: bash
         run: |
-          mkdir -p artifacts/sphinx
-          SPHINX_FOLDER=${{ inputs.sphinx-folder : inputs.sphinx-folder.default }}
-          echo $SPHINX_FOLDER
-          poetry run sphinx-build -b html $SPHINX_FOLDER artifacts/sphinx
+          #mkdir -p artifacts/sphinx
+          #SPHINX_FOLDER=${{ inputs.sphinx-folder : inputs.sphinx-folder.default }}
+          #echo $SPHINX_FOLDER
+          poetry run sphinx-build -b html ${{ inputs.sphinx-folder || 'book/sphinx' }} artifacts/sphinx
 
       - name: Archive sphinx documentation
         uses: actions/upload-artifact@v3
