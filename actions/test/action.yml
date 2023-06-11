@@ -13,7 +13,10 @@ on:
         description: 'Python version'
         type: string
         required: true
-
+      source-folder:
+        description: 'Source folder'
+        type: string
+        required: true
 
 runs:
   using: "composite"
@@ -39,7 +42,7 @@ runs:
           mkdir -p artifacts/tests/html-coverage
           mkdir -p artifacts/tests/html-report
           
-          poetry run pytest --cov=cvx --random-order --verbose \
+          poetry run pytest --cov=${{ inputs.source-folder }} --random-order --verbose \
                             --html=artifacts/tests/html-report/report.html \
                             --cov-report xml:artifacts/tests/coverage/coverage.xml \
                             --cov-report html:artifacts/tests/html-coverage \
