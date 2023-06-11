@@ -1,1 +1,41 @@
+name: Count lines
 
+description: "count lines"
+
+on:
+  workflow_call:
+    inputs:
+      os:
+        description: 'OS'
+        type: string
+        required: true
+      python-version:
+        description: 'Python version'
+        type: string
+        required: true
+      source-folder:
+        description: 'Source folder'
+        type: string
+        required: true
+
+runs:
+    using: "composite"
+    steps:
+
+      - uses: cvxgrp/.github/actions/setup-environment@main
+        with:
+          os: ${{ runner.os }}
+          python-version: "${{ inputs.python-version }}"
+
+      - name: count
+        shell: bash
+        run: |
+            pip install pygount==1.5.1
+            mkdir -p artifacts/lines
+            pygount --format=summary --out=artifacts/lines/lines.txt ${{ inputs.source-folder }}
+
+      - name: Archive counts
+        uses: actions/upload-artifact@v3
+        with:
+          name: count
+          path: artifacts/lines
