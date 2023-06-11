@@ -39,4 +39,4 @@ runs:
         with:
           name: dependencies
           path: artifacts/build
-    
+          retention-days: 1    
