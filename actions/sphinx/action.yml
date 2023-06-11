@@ -13,11 +13,12 @@ on:
         description: 'Python version'
         type: string
         required: true
+        default: '3.10'
       sphinx-folder:
         description: 'Sphinx folder'
         type: string
         required: true
-
+        default: 'book/sphinx'
 
 runs:
   using: "composite"
