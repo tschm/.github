@@ -5,14 +5,15 @@ description: "Construct a Python environment for ci/cd using poetry"
 on:
   workflow_call:
     inputs:
-      os:
-        description: 'OS'
-        type: string
-        required: true
+      #os:
+      #  description: 'OS'
+      #  type: string
+      #  required: true
       python-version:
         description: 'Python version'
         type: string
-        required: true
+        required: false
+        default: '3.10'
 
 runs:
   using: "composite"
@@ -35,7 +36,7 @@ runs:
       uses: actions/cache@v3
       with:
         path: .venv
-        key: venv-${{ inputs.os }}-${{ inputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+        key: venv-${{ runner.os }}-${{ inputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
 
     - name: Install project
       shell: bash
