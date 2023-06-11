@@ -21,8 +21,7 @@ runs:
   steps:
       - uses: cvxgrp/.github/actions/setup-environment@main
         with:
-          # os: ${{ runner.os }}
-          python-version: ${{ inputs.python-version : inputs.python-version.default }}
+          python-version: ${{ inputs.python-version }}
           
       - name: Install sphinx
         shell: bash
