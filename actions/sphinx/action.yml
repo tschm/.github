@@ -35,9 +35,6 @@ runs:
       - name: Build sphinx
         shell: bash
         run: |
-          #mkdir -p artifacts/sphinx
-          #SPHINX_FOLDER=${{ inputs.sphinx-folder : inputs.sphinx-folder.default }}
-          #echo $SPHINX_FOLDER
           poetry run sphinx-build -b html ${{ inputs.sphinx-folder || 'book/sphinx' }} artifacts/sphinx
 
       - name: Archive sphinx documentation
