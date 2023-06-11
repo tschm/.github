@@ -47,3 +47,5 @@ runs:
         with:
           name: sphinx
           path: artifacts/sphinx
+          retention-days: 1
+          
