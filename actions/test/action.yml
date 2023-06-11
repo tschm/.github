@@ -50,7 +50,14 @@ runs:
         with:
           name: tests
           path: t/artifacts/tests
-          
+      
+      - name: GitHub Pages action
+        uses: JamesIves/github-pages-deploy-action@v4.2.2
+        with:
+          branch: gh-pages           # The branch the action should deploy to.
+          folder: t                  # The folder the action should deploy.
+
+
       # works currently only for public repos
       # - name: Coveralls GitHub Action
       #   uses: coverallsapp/github-action@v2
