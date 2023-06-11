@@ -56,3 +56,5 @@ runs:
         with:
           name: tests
           path: artifacts/tests
+          retention-days: 1
+          
