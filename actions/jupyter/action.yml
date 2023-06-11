@@ -1,1 +1,48 @@
+name: Build the Jupyter Book
 
+description: "Build jupyter book"
+
+on:
+  workflow_call:
+    inputs:
+      os:
+        description: 'OS'
+        type: string
+        required: true
+      python-version:
+        description: 'Python version'
+        type: string
+        required: true
+      kernel:
+        description: 'Jupyter kernel'
+        type: string
+        required: true
+
+runs:
+    using: "composite"
+    steps:
+      - uses: cvxgrp/.github/actions/setup-environment@main
+        with:
+          os: ${{ inputs.os }}
+          python-version: ${{ inputs.python-version }}
+          
+      - name: Install jupyterbook
+        shell: bash
+        run: |
+          poetry run pip install jupyter-book
+          poetry run python -m ipykernel install --user --name=${{ inputs.kernel }}
+
+      # Build the book
+      - name: Build the book
+        shell: bash
+        run: |
+          poetry run jupyter-book clean book
+          poetry run jupyter-book build book
+         
+      # Upload the book
+      - name: Archive book
+        uses: actions/upload-artifact@v3
+        with:
+          name: book
+          path: book/_build/html
+         
