@@ -36,7 +36,6 @@ runs:
       - name: Build the book
         shell: bash
         run: |
-          poetry run jupyter-book version
           poetry run jupyter-book build book
          
       # Upload the book
