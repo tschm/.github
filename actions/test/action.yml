@@ -5,10 +5,6 @@ description: "Perform a test"
 on:
   workflow_call:
     inputs:
-      #os:
-      #  description: 'OS'
-      #  type: string
-      #  required: true
       python-version:
         description: 'Python version'
         type: string
@@ -25,8 +21,7 @@ runs:
   steps:
       - uses: cvxgrp/.github/actions/setup-environment@main
         with:
-          os: ${{ runner.os }}
-          python-version: ${{ inputs.python-version }}
+          python-version: ${{ inputs.python-version || '3.10' }}
 
       - name: Install pytest
         shell: bash
@@ -44,7 +39,7 @@ runs:
           mkdir -p artifacts/tests/html-coverage
           mkdir -p artifacts/tests/html-report
           
-          poetry run pytest --cov=${{ inputs.source-folder }} --random-order --verbose \
+          poetry run pytest --cov=${{ inputs.source-folder || 'cvx' }} --random-order --verbose \
                             --html=artifacts/tests/html-report/report.html \
                             --cov-report xml:artifacts/tests/coverage/coverage.xml \
                             --cov-report html:artifacts/tests/html-coverage \
