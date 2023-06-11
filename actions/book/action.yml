@@ -35,6 +35,12 @@ on:
 runs:
     using: "composite"
     steps:
+      - uses: cvxgrp/.github/actions/counting@main
+        with:
+          os: ${{ runner.os }}
+          python-version: "${{ inputs.python-version }}"
+          source-folder: "${{ inputs.source-folder }}"
+          
       - uses: cvxgrp/.github/actions/dependencies@main
         with:
           os: ${{ runner.os }}
@@ -46,7 +52,12 @@ runs:
           os: ${{ runner.os }}
           python-version: "${{ inputs.python-version }}"
           sphinx-folder: "${{ inputs.sphinx-folder }}"
-
+     
+      - uses: cvxgrp/.github/actions/tests@main
+        with:
+          os: ${{ runner.os }}          
+          python-version: "${{ inputs.python-version }}"
+      
       - name: Install jupyterbook
         shell: bash
         run: |
@@ -81,6 +92,13 @@ runs:
           name: dependencies
           path: book/_build/html/artifacts/build
 
+      # Download the test artifacts
+      - name: Download the test artifacts
+        uses: actions/download-artifact@v3        
+        with:          
+           name: tests          
+           path: book/_build/html/artifacts/tests
+           
       # Check uploads
       - name: Inspect upload
         shell: bash
@@ -92,11 +110,3 @@ runs:
         with:
           branch: gh-pages           # The branch the action should deploy to.
           folder: book/_build/html   # The folder the action should deploy.
-
-
-      # Push the book's HTML to github-pages
-      #- name: GitHub Pages action
-      #  uses: peaceiris/actions-gh-pages@v3.6.1
-      #  with:
-      #    github_token: ${{ inputs.GITHUB_TOKEN }}
-      #    publish_dir: book/_build/html
