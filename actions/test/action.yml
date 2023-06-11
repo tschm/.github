@@ -8,12 +8,12 @@ on:
       python-version:
         description: 'Python version'
         type: string
-        required: true
+        required: false
         default: '3.10'
       source-folder:
         description: 'Source folder'
         type: string
-        required: true
+        required: false
         default: 'cvx'
         
 runs:
