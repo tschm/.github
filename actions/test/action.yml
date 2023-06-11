@@ -35,21 +35,21 @@ runs:
       - name: Run tests
         shell: bash
         run : |
-          mkdir -p artifacts/tests/coverage
-          mkdir -p artifacts/tests/html-coverage
-          mkdir -p artifacts/tests/html-report
+          mkdir -p t/artifacts/tests/coverage
+          mkdir -p t/artifacts/tests/html-coverage
+          mkdir -p t/artifacts/tests/html-report
           
           poetry run pytest --cov=cvx --random-order --verbose \
-                            --html=artifacts/tests/html-report/report.html \
-                            --cov-report xml:artifacts/tests/coverage/coverage.xml \
-                            --cov-report html:artifacts/tests/html-coverage \
+                            --html=t/artifacts/tests/html-report/report.html \
+                            --cov-report xml:t/artifacts/tests/coverage/coverage.xml \
+                            --cov-report html:t/artifacts/tests/html-coverage \
                             tests/
 
       - name: Archive tests results
         uses: actions/upload-artifact@v3
         with:
           name: tests
-          path: artifacts/tests
+          path: t/artifacts/tests
           
       # works currently only for public repos
       # - name: Coveralls GitHub Action
