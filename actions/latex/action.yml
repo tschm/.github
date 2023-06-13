@@ -31,6 +31,10 @@ runs:
       
       - name: Run Tectonic
         shell: bash
+        env:
+          # as recommended by the problems in 
+          # https://github.com/cvxgrp/robust_erm_note/actions/runs/5250958945/jobs/9485425629#step:5:1
+          RUST_BACKTRACE: '1'
         run: |
           mkdir -p publish
           tectonic --outdir publish ${{ inputs.paper }}
