@@ -46,11 +46,8 @@ runs:
                             tests/
           
           # I want to upload the result to gh-pages, hence this file disturbs
-          file="artifacts/tests/html-coverage/.gitignore"
-
-          if [ -f "$file" ] ; then
-            rm "$file"
-          fi
+          rm -f artifacts/tests/html-coverage/.gitignore
+          
           
       - name: Archive tests results
         uses: actions/upload-artifact@v3
