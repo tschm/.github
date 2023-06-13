@@ -49,7 +49,7 @@ runs:
           rm -f artifacts/tests/html-coverage/.gitignore
           
           # display all files...
-          tree artifacs/tests -all
+          # tree artifacs/tests -all
           
       - name: Archive tests results
         uses: actions/upload-artifact@v3
