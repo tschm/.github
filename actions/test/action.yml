@@ -35,9 +35,9 @@ runs:
       - name: Run tests
         shell: bash
         run : |
-          mkdir -p artifacts/tests/coverage
-          mkdir -p artifacts/tests/html-coverage
-          mkdir -p artifacts/tests/html-report
+          #mkdir -p artifacts/tests/coverage
+          #mkdir -p artifacts/tests/html-coverage
+          #mkdir -p artifacts/tests/html-report
           
           poetry run pytest --cov=${{ inputs.source-folder || 'cvx' }} --random-order --verbose \
                             --html=artifacts/tests/html-report/report.html \
