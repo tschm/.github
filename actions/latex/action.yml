@@ -10,8 +10,8 @@ on:
         type: string
         required: true
       
-      GITHUB_TOKEN:
-        required: true
+      #GITHUB_TOKEN:
+      #  required: true
 
 runs:
   using: "composite"
@@ -26,7 +26,7 @@ runs:
       
       - uses: wtfjoke/setup-tectonic@v2.1.0
         with:
-          github-token: ${{ inputs.GITHUB_TOKEN }}
+          #github-token: ${{ inputs.GITHUB_TOKEN }}
           biber-version: '2.17'
       
       - name: Run Tectonic
