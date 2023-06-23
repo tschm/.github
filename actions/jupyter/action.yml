@@ -29,10 +29,19 @@ runs:
           poetry run pip install jupyter-book
           poetry run python -m ipykernel install --user --name=${{ inputs.kernel || 'cvx' }}
 
+      - uses: actions/cache@v3
+        name: Jupyter Cache
+        with:
+          path: ~/book/_build/.jupyter_cache
+          key: ${{ runner.os }}-jupyter-${{ hashFiles('**/*') }}
+          restore-keys: |
+            ${{ runner.os }}-jupyter-
+            
       # Build the book
       - name: Build the book
         shell: bash
         run: |
+          poetry run jupyter-book clean book
           poetry run jupyter-book build book
           # Create this weird .nojekyll file
           # see https://jupyterbook.org/en/stable/publish/gh-pages.html#option-1-copy-and-paste-your-books-build-contents-into-a-new-folder
