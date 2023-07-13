@@ -35,10 +35,6 @@ runs:
       - name: Run tests
         shell: bash
         run : |
-          #mkdir -p artifacts/tests/coverage
-          #mkdir -p artifacts/tests/html-coverage
-          #mkdir -p artifacts/tests/html-report
-          
           poetry run pytest --cov=${{ inputs.source-folder || 'cvx' }} --random-order --verbose \
                             --html=artifacts/tests/html-report/report.html \
                             --cov-report xml:artifacts/tests/coverage/coverage.xml \
@@ -47,9 +43,6 @@ runs:
           
           # I want to upload the result to gh-pages, hence this file disturbs
           rm -f artifacts/tests/html-coverage/.gitignore
-          
-          # display all files...
-          # tree artifacs/tests -all
           
       - name: Archive tests results
         uses: actions/upload-artifact@v3
