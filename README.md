@@ -6,7 +6,8 @@ Reusable workflows for cvxgrp
 
 ## :warning: Private repositories
 
-Be careful when using actions in private repositories. The group has a limited number of minutes per month.
+Be careful when using actions in private repositories. 
+The group has a limited number of minutes per month. 
 In public repositories, actions are free. 
 
 ## Poetry
