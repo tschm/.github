@@ -4,7 +4,7 @@ Reusable workflows for cvxgrp
 
 [Workflows](https://docs.github.com/en/actions/using-workflows/creating-starter-workflows-for-your-organization#creating-a-starter-workflow)
 
-** :warning: Warning **
+## :warning: 
 Be careful when using actions in private repositories. The group has a limited number of minutes per month.
 In public repositories, actions are free. 
 
