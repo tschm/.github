@@ -76,7 +76,7 @@ The second step is to run the pre-commit action. The third step is to run the cv
 this repository.
 
 There are many more examples of such workflow files in the repositories:
-* 
+
 * [cvxmarkowitz](https://github.com/cvxgrp/cvxmarkowitz/tree/main/.github/workflows)
 * [cvxsimulator](https://github.com/cvxgrp/simulator/tree/main/.github/workflows)
 
@@ -86,3 +86,4 @@ For paper repository we use the LaTeX workflow. For an example
 
 * [cov_pred_finance](https://github.com/cvxgrp/cov_pred_finance_paper/tree/main/.github/workflows)
 
+All paper repos tend to be private and are hence only visible to members of the group.
