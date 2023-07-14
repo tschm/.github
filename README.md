@@ -80,3 +80,8 @@ There are many more examples of such workflow files in the repositories:
 * [cvxsimulator](https://github.com/cvxgrp/simulator/tree/main/.github/workflows)
 
 Note the strong overlap between both projects. The jobs are essentially all the same.
+
+For paper repository we use the LaTeX workflow. For an example
+
+* [cov_pred_finance](https://github.com/cvxgrp/cov_pred_finance_paper/tree/main/.github/workflows)
+
