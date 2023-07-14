@@ -38,3 +38,14 @@ runs:
     - name: Install project
       shell: bash
       run: poetry install --no-interaction --all-extras
+
+    - name: Documentation
+      shell: bash
+      run: poetry show --only main --tree > artifacts/build/show.txt
+
+    - name: Archive Documentation
+      uses: actions/upload-artifact@v3
+      with:
+        name: build
+        path: artifacts/build
+        retention-days: 1
