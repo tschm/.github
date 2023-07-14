@@ -41,7 +41,9 @@ runs:
 
     - name: Documentation
       shell: bash
-      run: poetry show --only main --tree > artifacts/build/show.txt
+      run: | 
+        mkdir -p artifacts/build
+        poetry show --only main --tree > artifacts/build/show.txt
 
     - name: Archive Documentation
       uses: actions/upload-artifact@v3
