@@ -48,8 +48,8 @@ This workflow builds a sphinx documentation based on your docstrings.
 
 ### [test](https://github.com/cvxgrp/.github/blob/main/actions/test/action.yml)
 
-This workflow install pytest and some its friends. 
-It uploads the test results are artifacts.
+This workflow install pytest and some its friends.
+It uploads the test results as artifacts.
 It assumes the project is built with poetry.
 
 ## Using workflows
