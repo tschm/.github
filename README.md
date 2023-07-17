@@ -76,12 +76,12 @@ jobs:
     - uses: cvxgrp/.github/actions/test@main
 ```
 
-Every push to the repository will trigger the workflow. 
-It will run all jobs in the workflow. 
+Every push to the repository will trigger the workflow.
+It will run all jobs in the workflow.
 The first job is called basic. It will run on a ubuntu machine.
-The steps are the actions that will be executed. 
-The first step is to checkout the repository. 
-The second step is to run the pre-commit action. 
+The steps are the actions that will be executed.
+The first step is to checkout the repository.
+The second step is to run the pre-commit action.
 The third step is to run the cvxgrp test action defined in this repository.
 
 There are many more examples of such workflow files in the repositories:
@@ -96,4 +96,5 @@ For paper repository we use the LaTeX workflow. For an example
 
 * [cov_pred_finance](https://github.com/cvxgrp/cov_pred_finance_paper/tree/main/.github/workflows)
 
-All paper repos tend to be private and are hence only visible to members of the group.
+All paper repos tend to be private and are hence only
+visible to members of the group.
