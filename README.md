@@ -27,7 +27,7 @@ We go through an incomplete list of example actions created for cvxgrp:
 
 ### [latex](https://github.com/cvxgrp/.github/blob/main/actions/latex/action.yml)
 
-This workflow is used to compile *.tex files. 
+This workflow is used to compile *.tex files.
 It uploads the generated documents to the draft branch.
 
 ### [release](https://github.com/cvxgrp/.github/blob/main/actions/release/action.yml)
@@ -48,7 +48,8 @@ This workflow builds a sphinx documentation based on your docstrings.
 
 ### [test](https://github.com/cvxgrp/.github/blob/main/actions/test/action.yml)
 
-This workflow install pytest and some its friends. It uploads the test results are artifacts.
+This workflow install pytest and some its friends. 
+It uploads the test results are artifacts.
 It assumes the project is built with poetry.
 
 ## Using workflows
@@ -57,7 +58,7 @@ Please follow:
 
 * Create the '.github/workflows' folder.
 
-In this folder create a yml file with the name of the workflow 
+In this folder create a yml file with the name of the workflow
 you want to use, e.g. basic.yml.
 
 ```yaml
