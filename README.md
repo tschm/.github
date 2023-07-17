@@ -13,7 +13,8 @@ In public repositories, actions are free.
 ## Poetry
 
 To take full advantage of those actions we recommend moving to [poetry](https://python-poetry.org/).
-Poetry is a python package manager that allows to create virtual environments and to manage dependencies.
+Poetry is a python package manager that allows to create
+virtual environments and to manage dependencies.
 It is also a build tool that can be used to create packages and to run tests.
 
 ## Action workflows
@@ -56,7 +57,8 @@ Please follow:
 
 * Create the '.github/workflows' folder.
 
-In this folder create a yml file with the name of the workflow you want to use, e.g. basic.yml.
+In this folder create a yml file with the name of the workflow 
+you want to use, e.g. basic.yml.
 
 ```yaml
 name: "basic"
@@ -75,17 +77,20 @@ jobs:
 ```
 
 Every push to the repository will trigger the workflow. 
-It will run all jobs in the workflow. The first job is called basic. It will run on a ubuntu machine.
-The steps are the actions that will be executed. The first step is to checkout the repository. 
-The second step is to run the pre-commit action. The third step is to run the cvxgrp test action defined in 
-this repository.
+It will run all jobs in the workflow. 
+The first job is called basic. It will run on a ubuntu machine.
+The steps are the actions that will be executed. 
+The first step is to checkout the repository. 
+The second step is to run the pre-commit action. 
+The third step is to run the cvxgrp test action defined in this repository.
 
 There are many more examples of such workflow files in the repositories:
 
 * [cvxmarkowitz](https://github.com/cvxgrp/cvxmarkowitz/tree/main/.github/workflows)
 * [cvxsimulator](https://github.com/cvxgrp/simulator/tree/main/.github/workflows)
 
-Note the strong overlap between both projects. The jobs are essentially all the same.
+Note the strong overlap between both projects.
+The jobs are essentially all the same.
 
 For paper repository we use the LaTeX workflow. For an example
 
