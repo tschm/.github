@@ -56,7 +56,7 @@ It assumes the project is built with poetry.
 
 Please follow:
 
-* Create the '.github/workflows' folder.
+- Create the '.github/workflows' folder.
 
 In this folder create a yml file with the name of the workflow
 you want to use, e.g. basic.yml.
@@ -87,15 +87,15 @@ The third step is to run the cvxgrp test action defined in this repository.
 
 There are many more examples of such workflow files in the repositories:
 
-* [cvxmarkowitz](https://github.com/cvxgrp/cvxmarkowitz/tree/main/.github/workflows)
-* [cvxsimulator](https://github.com/cvxgrp/simulator/tree/main/.github/workflows)
+- [cvxmarkowitz](https://github.com/cvxgrp/cvxmarkowitz/tree/main/.github/workflows)
+- [cvxsimulator](https://github.com/cvxgrp/simulator/tree/main/.github/workflows)
 
 Note the strong overlap between both projects.
 The jobs are essentially all the same.
 
 For paper repository we use the LaTeX workflow. For an example
 
-* [cov_pred_finance](https://github.com/cvxgrp/cov_pred_finance_paper/tree/main/.github/workflows)
+- [cov_pred_finance](https://github.com/cvxgrp/cov_pred_finance_paper/tree/main/.github/workflows)
 
 All paper repos tend to be private and are hence only
 visible to members of the group.
