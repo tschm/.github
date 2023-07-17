@@ -6,39 +6,44 @@ Reusable workflows for cvxgrp
 
 ## :warning: Private repositories
 
-Be careful when using actions in private repositories. 
-The group has a limited number of minutes per month. 
-In public repositories, actions are free. 
+Be careful when using actions in private repositories.
+The group has a limited number of minutes per month.
+In public repositories, actions are free.
 
 ## Poetry
 
 To take full advantage of those actions we recommend moving to [poetry](https://python-poetry.org/).
 Poetry is a python package manager that allows to create virtual environments and to manage dependencies.
-It is also a build tool that can be used to create packages and to run tests. 
+It is also a build tool that can be used to create packages and to run tests.
 
 ## Action workflows
 
-Github workflows can help to robustify and to automate the process of creating software and documents.
-We recommend to [Github introduction](https://docs.github.com/actions).
+Github workflows can help to robustify and to automate
+the process of creating software and documents.
+We recommend [Github introduction](https://docs.github.com/actions).
 
 We go through an incomplete list of example actions created for cvxgrp:
 
 ### [latex](https://github.com/cvxgrp/.github/blob/main/actions/latex/action.yml)
 
-This workflow is used to compile *.tex files. It uploads the generated documents to the draft branch.
+This workflow is used to compile *.tex files. 
+It uploads the generated documents to the draft branch.
 
 ### [release](https://github.com/cvxgrp/.github/blob/main/actions/release/action.yml)
 
-This workflow is used to released the package to pypi. It assumes the project is built with poetry.
+This workflow is used to released the package to pypi.
+It assumes the project is built with poetry.
 
 ### [setup-environment](https://github.com/cvxgrp/.github/blob/main/actions/setup-environment/action.yml)
 
-This workflow installs python and poetry. It then proceeds to construct the virtual environment using poetry.
-It can rely on cached versions of the virtual environment. It assumes the project is built with poetry.
+This workflow installs python and poetry.
+It then proceeds to construct the virtual environment using poetry.
+It can rely on cached versions of the virtual environment.
+It assumes the project is built with poetry.
 
 ### [sphinx](https://github.com/cvxgrp/.github/blob/main/actions/sphinx/action.yml)
 
-This workflow builds a sphinx documentation based on your docstrings. 
+This workflow builds a sphinx documentation based on your docstrings.
 
 ### [test](https://github.com/cvxgrp/.github/blob/main/actions/test/action.yml)
 
