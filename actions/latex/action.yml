@@ -37,7 +37,13 @@ runs:
           RUST_BACKTRACE: '1'
         run: |
           mkdir -p publish
-          tectonic --outdir publish ${{ inputs.paper }}
+          echo "Compiling ${{ inputs.paper }}"
+          for f in ${{ inputs.paper }}
+          do
+            echo "-- Compiling $f"
+            tectonic $f --outdir publish
+          done
+
           
       # Push the paper folder to the draft branch
       - name: GitHub Pages action
