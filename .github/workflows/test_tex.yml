@@ -15,7 +15,7 @@ jobs:
         with:
           paper: tests/tex/*.tex
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          output-folder: tests/texgroup
+          output-folder: /tests/texgroup
 
       - uses: ./actions/latex
         with:

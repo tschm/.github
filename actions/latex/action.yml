@@ -42,12 +42,12 @@ runs:
           # https://github.com/cvxgrp/robust_erm_note/actions/runs/5250958945/jobs/9485425629#step:5:1
           RUST_BACKTRACE: '1'
         run: |
-          mkdir -p publish/${{ inputs.output-folder }}
+          mkdir -p publish${{ inputs.output-folder }}
           echo "Compiling ${{ inputs.paper }}"
           for f in ${{ inputs.paper }}
           do
             echo "-- Compiling $f"
-            tectonic $f --outdir publish/${{ inputs.output-folder }}
+            tectonic $f --outdir publish${{ inputs.output-folder }}
           done
 
           
