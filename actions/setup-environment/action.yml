@@ -37,7 +37,10 @@ runs:
 
     - name: Install project
       shell: bash
-      run: poetry install --no-interaction --all-extras
+      run: |
+        # upgrade pip 
+        poetry run pip install --upgrade pip
+        poetry install --no-interaction --all-extras
 
     - name: Documentation
       shell: bash
