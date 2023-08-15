@@ -2,7 +2,7 @@
 
 .PHONY: clean
 clean:  ## Clean up caches and build artifacts
-	@rm -rf .idea
+	@git clean -X -d -f
 
 .PHONY: help
 help:  ## Display this help screen
