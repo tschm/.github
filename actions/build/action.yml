@@ -1,0 +1,34 @@
+name: Build
+
+description: "Build with poetry"
+
+on:
+  workflow_call:
+    inputs:
+      python-version:
+        description: 'Python version'
+        type: string
+        required: false
+        default: '3.10'
+
+runs:
+  using: "composite"
+
+  steps:
+    - uses: cvxgrp/.github/actions/setup-environment@main
+      with:
+        python-version: "${{ inputs.python-version || '3.10' }}"
+
+    - name: Change version in pyproject.toml
+      shell: bash
+      run: |
+         poetry version ${{  github.ref_name }}
+         poetry build
+      
+    # Archive the dist folder
+    - name: Archive sphinx documentation
+      uses: actions/upload-artifact@v3
+      with:
+        name: dist
+        path: dist
+        retention-days: 1
