@@ -19,8 +19,8 @@ on:
 runs:
   using: "composite"
   steps:
-      - name: Check out repository
-        uses: actions/checkout@v3
+      #- name: Check out repository
+      #  uses: actions/checkout@v3
 
       - uses: cvxgrp/.github/actions/setup-environment@main
         with:
