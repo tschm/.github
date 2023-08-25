@@ -15,6 +15,7 @@ runs:
         path: .book
 
     - name: Create .nojekyll
+      shell: bash
       run: touch .book/.nojekyll
 
     - name: GitHub Pages action
