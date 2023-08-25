@@ -22,6 +22,9 @@ on:
 runs:
   using: "composite"
   steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v3
+
       - uses: actions/cache@v3
         name: Tectonic Cache
         with:
