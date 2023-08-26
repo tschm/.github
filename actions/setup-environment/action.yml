@@ -22,7 +22,7 @@ runs:
       with:
         # Why is this not automatically happen?
         python-version: ${{ inputs.python-version || '3.10' }}
-        
+
     - name: Install Poetry
       uses: snok/install-poetry@v1
       with:
@@ -41,13 +41,13 @@ runs:
     - name: Install project
       shell: bash
       run: |
-        # upgrade pip 
+        # upgrade pip
         poetry run pip install --upgrade pip
         poetry install --no-interaction --all-extras
 
     - name: Documentation
       shell: bash
-      run: | 
+      run: |
         mkdir -p artifacts/build
         poetry show --only main --tree > artifacts/build/show.txt
 

@@ -52,7 +52,7 @@ It assumes the project is built with poetry.
 
 ## Using workflows
 
-Creating workflows for your own repository is simple. 
+Creating workflows for your own repository is simple.
 Please follow:
 
 - Create the '.github/workflows' folder.
@@ -90,7 +90,7 @@ There are many more examples of such workflow files in the repositories:
 - [cvxsimulator](https://github.com/cvxgrp/simulator/tree/main/.github/workflows)
 
 Note the strong overlap between both projects.
-The jobs are essentially all the same. 
+The jobs are essentially all the same.
 Rather than coding the same workflow twice we point from both places to the actions
 defined here.
 

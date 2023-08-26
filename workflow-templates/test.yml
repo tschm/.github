@@ -19,7 +19,7 @@ jobs:
         with:
           os: ${{ matrix.os }}
           python-version: ${{ matrix.python-version }}
-          
+
       # uncomment those lines once the repository is public
       # - name: Coveralls GitHub Action
       #   uses: coverallsapp/github-action@v2

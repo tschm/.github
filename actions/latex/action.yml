@@ -9,7 +9,7 @@ on:
         description: 'paper'
         type: string
         required: true
-      
+
       GITHUB_TOKEN:
         required: true
 
@@ -32,16 +32,16 @@ runs:
           key: ${{ runner.os }}-tectonic-${{ hashFiles('**/*.tex') }}
           restore-keys: |
             ${{ runner.os }}-tectonic-
-      
+
       - uses: wtfjoke/setup-tectonic@v2.1.0
         with:
           github-token: ${{ inputs.GITHUB_TOKEN }}
           biber-version: '2.17'
-      
+
       - name: Run Tectonic
         shell: bash
         env:
-          # as recommended by the problems in 
+          # as recommended by the problems in
           # https://github.com/cvxgrp/robust_erm_note/actions/runs/5250958945/jobs/9485425629#step:5:1
           RUST_BACKTRACE: '1'
         run: |
@@ -53,7 +53,7 @@ runs:
             tectonic $f --outdir publish${{ inputs.output-folder }}
           done
 
-          
+
       # Push the paper folder to the draft branch
       - name: GitHub Pages action
         uses: JamesIves/github-pages-deploy-action@v4.2.2

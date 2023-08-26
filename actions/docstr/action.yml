@@ -15,7 +15,7 @@ on:
         type: string
         required: false
         default: 'cvx'
-        
+
 runs:
   using: "composite"
   steps:
@@ -25,12 +25,11 @@ runs:
 
       - name: Install pytest
         shell: bash
-        run: |     
+        run: |
             poetry run pip install --no-cache-dir \
                        docstr-coverage
-                       
+
       - name: Run tests
         shell: bash
         run : |
           docstr-coverage ${{ inputs.source-folder || 'cvx' }}
-        

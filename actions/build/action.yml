@@ -24,7 +24,7 @@ runs:
       run: |
          poetry version ${{  github.ref_name }}
          poetry build
-      
+
     # Archive the dist folder
     - name: Archive sphinx documentation
       uses: actions/upload-artifact@v3
