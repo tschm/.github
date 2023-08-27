@@ -34,7 +34,7 @@ runs:
             poetry run pytest tests
 
       - name: MacOs specific
-        if: ${{ runner.os == 'Mac' }}
+        if: ${{ runner.os == 'macOS' }}
         shell: bash
         run: |
           poetry run pytest tests
