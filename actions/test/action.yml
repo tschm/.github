@@ -27,19 +27,19 @@ runs:
         shell: bash
         run: echo ${{ runner.os }}
 
-      - name: Windows specific
+      - name: Test on Windows
         if: ${{ runner.os == 'Windows' }}
         shell: bash
         run: |
             poetry run pytest tests
 
-      - name: MacOs specific
+      - name: Test on macOS
         if: ${{ runner.os == 'macOS' }}
         shell: bash
         run: |
           poetry run pytest tests
 
-      - name: Install pytest
+      - name: Test on Linux
         if: ${{ runner.os == 'Linux' }}
         shell: bash
         run: |
