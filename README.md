@@ -71,8 +71,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - uses: pre-commit/action@v3.0.0
+    - uses: actions/checkout@v3.0
     - uses: cvxgrp/.github/actions/test@main
 ```
 
