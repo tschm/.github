@@ -27,26 +27,37 @@ runs:
         shell: bash
         run: echo ${{ runner.os }}
 
+      - name: Windows specific
+        if: ${{ runner.os == 'Windows' }}
+        shell: bash
+        run: |
+            poetry run pytest tests
+
+      - name: MacOs specific
+        if: ${{ runner.os == 'Mac' }}
+        shell: bash
+        run: |
+          poetry run pytest tests
+
       - name: Install pytest
+        if: ${{ runner.os == 'Linux' }}
         shell: bash
         run: |
             poetry run pip install --no-cache-dir \
                        pytest-html \
                        pytest-random-order
 
-      - name: Run tests
-        shell: bash
-        run : |
-          poetry run pytest --cov=${{ inputs.source-folder || 'cvx' }} --random-order --verbose \
-                            --html=artifacts/tests/html-report/report.html \
-                            --cov-report xml:artifacts/tests/coverage/coverage.xml \
-                            --cov-report html:artifacts/tests/html-coverage \
-                            tests/
+            poetry run pytest --cov=${{ inputs.source-folder || 'cvx' }} --random-order --verbose \
+                              --html=artifacts/tests/html-report/report.html \
+                              --cov-report xml:artifacts/tests/coverage/coverage.xml \
+                              --cov-report html:artifacts/tests/html-coverage \
+                              tests/
 
-          # I want to upload the result to gh-pages, hence this file disturbs
-          rm -f artifacts/tests/html-coverage/.gitignore
+            # I want to upload the result to gh-pages, hence this file disturbs
+            rm -f artifacts/tests/html-coverage/.gitignore
 
       - name: Archive tests results
+        if: ${{ runner.os == 'Linux' }}
         uses: actions/upload-artifact@v3
         with:
           name: tests
