@@ -30,10 +30,13 @@ repos:
       - id: pyupgrade
 
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.26.1
+    rev: 0.26.2
     hooks:
       - id: check-dependabot
+        args: [ "--verbose" ]
+
       - id: check-github-actions
-        verbose: true
+        args: ["--verbose"]
+
       - id: check-github-workflows
-        verbose: true
+        args: ["--verbose"]
