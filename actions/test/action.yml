@@ -44,6 +44,7 @@ runs:
         shell: bash
         run: |
             poetry run pip install --no-cache-dir \
+                       pytest-cov \
                        pytest-html \
                        pytest-random-order
 
