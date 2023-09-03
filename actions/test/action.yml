@@ -50,7 +50,10 @@ runs:
 
             poetry run pytest --cov=${{ inputs.source-folder || 'cvx' }} --random-order --verbose \
                               --html=artifacts/tests/html-report/report.html \
+                              --cov-report term \
                               --cov-report xml:artifacts/tests/coverage/coverage.xml \
+                              --cov-report json:artifacts/tests/coverage/coverage.json \
+                              --cov-report lcov:artifacts/tests/coverage/coverage.info \
                               --cov-report html:artifacts/tests/html-coverage \
                               tests/
 
