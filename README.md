@@ -28,10 +28,11 @@ We go through an incomplete list of example actions created for cvxgrp:
 This workflow is used to compile *.tex files.
 It uploads the generated documents to the draft branch.
 
-### [release](https://github.com/cvxgrp/.github/blob/main/actions/release/action.yml)
+### [build](https://github.com/cvxgrp/.github/blob/main/actions/build/action.yml)
 
-This workflow is used to released the package to pypi.
-It assumes the project is built with poetry.
+This workflow is used to support the release of packages (to pypi).
+It assumes the project is built with poetry. It publishes the produced
+'dist' folder to a dedicated branch.
 
 ### [setup-environment](https://github.com/cvxgrp/.github/blob/main/actions/setup-environment/action.yml)
 
