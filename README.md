@@ -67,21 +67,43 @@ on:
   push:
 
 jobs:
-  basic:
+  pre-commit:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3.0
+    - uses: actions/checkout@v3
+    - uses: pre-commit/action@v3.0.0
+      with:
+        extra_args: '--verbose --all-files'
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
     - uses: cvxgrp/.github/actions/test@main
+
+    - name: Coveralls GitHub Action
+      uses: coverallsapp/github-action@v2
+      with:
+        files: artifacts/tests/coverage/coverage.info
+        format: lcov
 ```
 
 Every push to the repository will trigger the workflow.
-It will run all jobs in the workflow.
-The first job is called basic. It will run on a ubuntu machine.
+It will run all jobs in the workflow. 
+There are two jobs defined here: pre-commit and test.
+Both these jobs run on a ubuntu machine.
+Each job consists of at least one step. 
 The steps are the actions that will be executed.
-The first step is to checkout the repository.
-The second step is to run the pre-commit action.
-The third step is to run the cvxgrp test action defined in this repository.
+
+In pre-commit job we checkout the repository first and then
+run the 3rd party pre-commit/action step.
+
+In the test job we run the cvxgrp action performing
+all tests. The action would checkout the repository first.
+In the second step we share the coverage results
+with yet another 3rdd party GitHub action.
+
+It is very common to use external GitHub actions.
 
 There are many more examples of such workflow files in the repositories:
 
