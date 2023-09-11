@@ -89,10 +89,10 @@ jobs:
 ```
 
 Every push to the repository will trigger the workflow.
-It will run all jobs in the workflow. 
+It will run all jobs in the workflow.
 There are two jobs defined here: pre-commit and test.
 Both these jobs run on a ubuntu machine.
-Each job consists of at least one step. 
+Each job consists of at least one step.
 The steps are the actions that will be executed.
 
 In pre-commit job we checkout the repository first and then
