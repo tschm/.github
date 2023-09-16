@@ -49,7 +49,7 @@ following:
 
 - Read the {{ package }} source and enhance the documentation,
   or address TODOs
-- Browse the [issue tracker](<https://github.com/cvxgrp/{{> package }}/issues),
+- Browse the [issue tracker](https://github.com/cvxgrp/{{ package }}/issues),
   and look for the issues tagged "help wanted".
 
 ## License
