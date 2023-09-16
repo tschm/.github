@@ -18,7 +18,7 @@ VENV :=.venv
 install:  ## Install a virtual environment
 	python -m venv ${VENV}
 	${VENV}/bin/pip install --upgrade pip
-	#${VENV}/bin/pip install -r requirements.txt
+	${VENV}/bin/pip install -r requirements.txt
 
 .PHONY: fmt
 fmt: install ## Run autoformatting and linting
