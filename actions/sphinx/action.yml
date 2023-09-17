@@ -47,7 +47,8 @@ runs:
                      sphinx==5.0.2 \
                      sphinx-autoapi==1.8.4 \
                      sphinx-rtd-theme==1.0.0 \
-                     recommonmark==0.7.1
+                     recommonmark==0.7.1  \
+                     toml
 
       - name: Build sphinx
         shell: bash
