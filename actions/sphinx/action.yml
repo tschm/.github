@@ -42,8 +42,8 @@ runs:
         run: |
           poetry run pip install --no-cache-dir \
                      sphinx==7.2.6 \
-                     sphinx-autoapi
-                     #sphinx-rtd-theme \
+                     sphinx-autoapi \
+                     sphinx-rtd-theme
                      #recommonmark  \
                      #toml
 
