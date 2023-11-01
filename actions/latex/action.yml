@@ -71,7 +71,7 @@ runs:
       - name: GitHub Pages action
         uses: JamesIves/github-pages-deploy-action@v4.2.2
         with:
-          branch: draft # The branch the action should deploy to.
+          branch: draft${{ inputs.output-folder }} # The branch the action should deploy to.
           folder: publish${{ inputs.output-folder }}  # The folder the action should deploy.
 
       # To make your draft folder public you would have to go to Settings => Pages
