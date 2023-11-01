@@ -37,7 +37,7 @@ on:
         type: string
         required: false
         default: 'draft'
-        
+
 runs:
   using: "composite"
   steps:
