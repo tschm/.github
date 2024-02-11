@@ -75,9 +75,9 @@ runs:
 
       - name: Archive tests results
         if: ${{ runner.os == 'Linux' }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3    # @v4
         with:
           name: tests
           path: artifacts/tests
-          merge-multiple: true
+          #merge-multiple: true
           retention-days: 1
