@@ -27,7 +27,7 @@ on:
 
 permissions:
   contents: write
-    
+
 runs:
   using: "composite"
 
