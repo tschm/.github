@@ -28,6 +28,9 @@ on:
 runs:
   using: "composite"
 
+  permissions:
+    contents: write
+
   steps:
     - uses: cvxgrp/.github/actions/setup-environment@main
       with:
@@ -41,7 +44,7 @@ runs:
 
     # Archive the dist folder
     - name: Archive sphinx documentation
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: dist
         path: dist
@@ -49,7 +52,7 @@ runs:
 
     # Push dist folder to the build branch
     - name: Publish the dist folder
-      uses: JamesIves/github-pages-deploy-action@v4.4.3
+      uses: JamesIves/github-pages-deploy-action@v4
       with:
         branch: dist     # The branch the action should deploy to.
         folder: dist     # The folder the action should deploy.
