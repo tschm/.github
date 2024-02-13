@@ -40,7 +40,7 @@ runs:
           poetry show --only main --tree > artifacts/build/show.txt
 
       - name: Archive dependencies
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: dependencies
           path: artifacts/build
