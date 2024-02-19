@@ -14,7 +14,3 @@ jobs:
       - uses: ./actions/pdoc
         with:
           source-folder: "cvx"
-
-          #paper: tests/tex/*.tex
-          #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          #output-folder: /tests/texgroup
