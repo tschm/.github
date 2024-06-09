@@ -22,7 +22,7 @@ on:
         description: 'Python version'
         type: string
         required: false
-        default: '3.10'
+        default: '3.11'
 
 runs:
   using: "composite"
@@ -34,7 +34,7 @@ runs:
       uses: actions/setup-python@v5
       with:
         # Why is this not automatically happen?
-        python-version: ${{ inputs.python-version || '3.10' }}
+        python-version: ${{ inputs.python-version || '3.11' }}
 
     - name: Install Poetry
       uses: snok/install-poetry@v1
@@ -65,7 +65,7 @@ runs:
         poetry show --only main --tree > artifacts/build/show.txt
 
     - name: Archive Documentation
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@4
       with:
         name: build
         path: artifacts/build

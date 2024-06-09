@@ -18,11 +18,6 @@ description: "Perform Deptry"
 on:
   workflow_call:
     inputs:
-      python-version:
-        description: 'Python version'
-        type: string
-        required: false
-        default: '3.10'
       source-folder:
         description: 'Source folder'
         type: string
@@ -33,16 +28,13 @@ runs:
   using: "composite"
   steps:
       - uses: cvxgrp/.github/actions/setup-environment@main
-        with:
-          python-version: ${{ inputs.python-version || '3.10' }}
 
       - name: Install deptry
         shell: bash
         run: |
-            poetry run pip install --no-cache-dir \
-                       deptry
+            poetry run pip install --no-cache-dir deptry
 
-      - name: Run tests
+      - name: Run deptry
         shell: bash
         run : |
           poetry run deptry ${{ inputs.source-folder || 'cvx' }}
