@@ -67,6 +67,6 @@ runs:
     - name: Archive Documentation
       uses: actions/upload-artifact@v4
       with:
-        name: build
+        name: build-${{ runner.os }}-${{ inputs.python-version }}
         path: artifacts/build
         retention-days: 1
