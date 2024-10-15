@@ -2,19 +2,9 @@ name: "Build book"
 
 on:
   push
-    #:
-    #branches:
-    #  - main
-
 
 jobs:
-  #runs-on: ubuntu-latest
 
-  #  steps:
-  #sphinx:
-  #  runs-on: "ubuntu-latest"
-  #  steps:
-  #    - uses: cvxgrp/.github/actions/sphinx@main
   pdoc:
     runs-on: "ubuntu-latest"
     steps:
