@@ -15,15 +15,6 @@ name: Build the Jupyter Book
 
 description: "Build jupyter book"
 
-on:
-  workflow_call:
-    inputs:
-      kernel:
-        description: 'Jupyter kernel'
-        type: string
-        required: false
-        default: 'cvx'
-
 runs:
     using: "composite"
 
@@ -37,8 +28,6 @@ runs:
         shell: bash
         run: |
           uv pip install jupyter-book --system
-          # There is no need to create the kernel if the jupyter book is installed within the same virtual environment as the package
-          # poetry run python -m ipykernel install --user --name=${{ inputs.kernel || 'cvx' }}
 
       # Build the book
       - name: Build the book
