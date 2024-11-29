@@ -27,18 +27,16 @@ on:
 runs:
   using: "composite"
   steps:
-    - name: Install uv
-      uses: astral-sh/setup-uv@v3
+    - name: Setup Python
+      uses: actions/setup-python@v5
       with:
-        # Install a specific version of uv.
-        version: "0.5.4"
+        python-version: ${{ inputs.python-version || '3.12' }}
 
-    - name: Set up Python ${{ inputs.python-version || '3.12' }}
-      shell: bash
+    - name: Install UV
       run: |
-          uv python install ${{ inputs.python-version || '3.12' }}
+        pip install uv
 
-    - name: Install the project
-      shell: bash
+    - name: Install Dependencies
       run: |
-          uv sync --all-extras
+        uv pip install -r requirements.txt --system
+        uv pip install -e . --system
