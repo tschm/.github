@@ -41,4 +41,5 @@ runs:
     - name: Install the project
       shell: bash
       run: |
-          uv pip install --system
+          uv sync --all-extras
+          # uv pip install --system
