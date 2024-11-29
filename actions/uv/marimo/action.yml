@@ -1,0 +1,68 @@
+#  Copyright 2023 Stanford University Convex Optimization Group
+#
+#    Licensed under the Apache License, Version 2.0 (the "License");
+#    you may not use this file except in compliance with the License.
+#    You may obtain a copy of the License at
+#
+#        http://www.apache.org/licenses/LICENSE-2.0
+#
+#    Unless required by applicable law or agreed to in writing, software
+#    distributed under the License is distributed on an "AS IS" BASIS,
+#    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#    See the License for the specific language governing permissions and
+#    limitations under the License.
+name: Convert Marimo *.py files to HTML for the book
+
+description: "Convert files for Marimo"
+
+on:
+  workflow_call:
+    inputs:
+      python-version:
+        description: 'Python version'
+        type: string
+        required: false
+        default: '3.12'
+
+runs:
+    using: "composite"
+
+    steps:
+      - uses: cvxgrp/.github/actions/uv/setup@main
+
+      - name: Install marimo
+        shell: bash
+        run: |
+          pip install marimo
+
+
+      - name: Convert *.py files in book/marimo folder to html files
+        shell: bash
+        run: |
+          # Create a directory for HTML outputs if it doesn't exist
+          mkdir -p artifacts/marimo
+
+          # Loop through all .py files
+          for file in book/marimo/*.py; do
+
+              echo $file
+
+              # Skip if file is not a regular file
+              [ -f "$file" ] || continue
+
+              # Extract filename without extension
+              filename=$(basename "$file" .py)
+              echo $filename
+
+              # Convert to HTML
+              echo "Converting $file to HTML..."
+              marimo export html "$file" -o "artifacts/marimo/${filename}.html"
+              marimo export md "$file" -o "artifacts/marimo/${filename}.md"
+          done
+
+      - name: Archive marimo html
+        uses: actions/upload-artifact@v4
+        with:
+          name: marimo
+          path: artifacts/marimo
+          retention-days: 1
