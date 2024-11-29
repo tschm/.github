@@ -32,9 +32,9 @@ runs:
       - name: Install deptry
         shell: bash
         run: |
-            uv pip install --no-cache-dir deptry
+            pip install --no-cache-dir deptry
 
       - name: Run deptry
         shell: bash
         run : |
-            uv run deptry ${{ inputs.source-folder || 'cvx' }}
+            deptry ${{ inputs.source-folder || 'cvx' }}
