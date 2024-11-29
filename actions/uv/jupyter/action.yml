@@ -36,7 +36,7 @@ runs:
       - name: Install jupyterbook
         shell: bash
         run: |
-          pip install jupyter-book
+          uv pip install jupyter-book --system
           # There is no need to create the kernel if the jupyter book is installed within the same virtual environment as the package
           # poetry run python -m ipykernel install --user --name=${{ inputs.kernel || 'cvx' }}
 
@@ -44,8 +44,8 @@ runs:
       - name: Build the book
         shell: bash
         run: |
-          jupyter-book clean book
-          jupyter-book build book
+          uv run jupyter-book clean book
+          uv run jupyter-book build book
           # Create this weird .nojekyll file
           # We do this in the book action... This is the wrong place
           # see https://jupyterbook.org/en/stable/publish/gh-pages.html#option-1-copy-and-paste-your-books-build-contents-into-a-new-folder

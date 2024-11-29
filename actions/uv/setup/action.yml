@@ -32,13 +32,13 @@ runs:
       with:
         python-version: ${{ inputs.python-version || '3.12' }}
 
-    #- name: Install UV
-    #  shell: bash
-    #  run: |
-    #    pip install uv
+    - name: Install UV
+      shell: bash
+      run: |
+        pip install uv
 
     - name: Install Dependencies
       shell: bash
       run: |
-        pip install -r requirements.txt
-        pip install -e .
+        uv pip install -r requirements.txt --system
+        uv pip install -e . --system
