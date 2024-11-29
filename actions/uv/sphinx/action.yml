@@ -33,7 +33,7 @@ runs:
       - name: Install sphinx
         shell: bash
         run: |
-          uv pip install --no-cache-dir \
+          pip install --no-cache-dir \
                      sphinx==7.2.6 \
                      sphinx-autoapi \
                      sphinx-rtd-theme
@@ -41,7 +41,7 @@ runs:
       - name: Build sphinx
         shell: bash
         run: |
-          uv run sphinx-build -b html ${{ inputs.sphinx-folder || 'book/sphinx' }} artifacts/sphinx
+          sphinx-build -b html ${{ inputs.sphinx-folder || 'book/sphinx' }} artifacts/sphinx
 
       - name: Archive sphinx documentation
         uses: actions/upload-artifact@v4
