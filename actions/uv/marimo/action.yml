@@ -18,17 +18,11 @@ description: "Convert files for Marimo"
 on:
   workflow_call:
     inputs:
-      marimo-folder:
+      marimo_folder:
         description: 'Folder with *.py files for Marimo'
         type: string
         required: false
         default: 'book/marimo'
-
-      python-version:
-        description: 'Python version'
-        type: string
-        required: false
-        default: '3.12'
 
 runs:
     using: "composite"
@@ -49,7 +43,7 @@ runs:
           mkdir -p artifacts/marimo
 
           # Loop through all .py files
-          for file in ${{ marimo-folder || 'book/marimo' }}/*.py; do
+          for file in ${{ marimo_folder || 'book/marimo' }}/*.py; do
 
               echo $file
 
