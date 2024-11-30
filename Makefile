@@ -35,7 +35,7 @@ help:  ## Display this help screen
 	@grep -E '^[a-z.A-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-18s\033[0m %s\n", $$1, $$2}' | sort
 
 
-.PHONY: jupyter
-jupyter: install ## Run jupyter lab
-	@poetry run pip install jupyterlab
-	@poetry run jupyter lab
+#.PHONY: jupyter
+#jupyter: install ## Run jupyter lab
+#	@poetry run pip install jupyterlab
+#	@poetry run jupyter lab
