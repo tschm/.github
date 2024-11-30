@@ -27,7 +27,7 @@ runs:
       - name: Install jupyterbook
         shell: bash
         run: |
-          uv pip install jupyter-book --system
+          uv pip install --no-cache-dir jupyter-book
 
       # Build the book
       - name: Build the book
