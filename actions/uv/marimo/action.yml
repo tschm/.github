@@ -33,7 +33,7 @@ runs:
       - name: Install marimo
         shell: bash
         run: |
-          pip install marimo
+          uv pip install marimo
 
 
       - name: Convert *.py files in book/marimo folder to html files
@@ -56,8 +56,8 @@ runs:
 
               # Convert to HTML
               echo "Converting $file to HTML..."
-              marimo export html "$file" -o "artifacts/marimo/${filename}.html"
-              marimo export md "$file" -o "artifacts/marimo/${filename}.md"
+              uv run marimo export html "$file" -o "artifacts/marimo/${filename}.html"
+              uv run marimo export md "$file" -o "artifacts/marimo/${filename}.md"
           done
 
       - name: Archive marimo html

@@ -32,13 +32,13 @@ runs:
       - name: Test on Linux
         shell: bash
         run: |
-            pip install --no-cache-dir \
+            uv pip install --no-cache-dir \
                        pytest \
                        pytest-cov \
                        pytest-html \
                        pytest-random-order
 
-            pytest --cov=${{ inputs.source-folder || 'cvx' }} --random-order --verbose \
+            uv run pytest --cov=${{ inputs.source-folder || 'cvx' }} --random-order --verbose \
                               --html=artifacts/tests/html-report/report.html \
                               --cov-report term \
                               --cov-report xml:artifacts/tests/coverage/coverage.xml \
