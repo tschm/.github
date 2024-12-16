@@ -25,3 +25,25 @@ tasks:
         desc: "Clean up caches and build artifacts"
         cmds:
             - git clean -X -d -f
+
+    coverage:
+        desc: "test with coverage"
+        cmds:
+            - task: install
+            - uv pip install pytest pytest-cov
+            - uv run coverage run --source=adia/. -m pytest
+            - uv run coverage report -m
+            - uv run coverage html
+            - cmd: open htmlcov/index.html
+              platforms: [darwin]
+            - cmd: xdg-open htmlcov/index.html 2> /dev/null
+              platforms: [linux]
+
+    marimo:
+        desc: "Install marimo"
+        vars:
+            MARIMO_PATH: '{{.MARIMO_PATH| default "book/marimo"}}'
+        cmds:
+            - task: install
+            - uv pip install marimo
+            - uv run marimo edit {{.MARIMO_PATH}}
