@@ -5,7 +5,7 @@ tasks:
         desc: "Install a virtual environment"
         internal: true
         cmds:
-	        - curl -LsSf https://astral.sh/uv/install.sh | sh
-	        - uv sync -vv
-	        - echo 'Please perform'
-	        - echo 'source .venv/bin/activate'
+		- curl -LsSf https://astral.sh/uv/install.sh | sh
+		- uv sync -vv
+		- echo 'Please perform'
+		- echo 'source .venv/bin/activate'
