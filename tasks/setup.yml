@@ -6,5 +6,4 @@ tasks:
         cmds:
             - curl -LsSf https://astral.sh/uv/install.sh | sh
             - uv sync -vv
-            - echo 'Please perform'
-            - echo 'source .venv/bin/activate'
+            - . .venv/bin/activate'
