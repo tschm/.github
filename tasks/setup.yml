@@ -6,3 +6,21 @@ tasks:
         cmds:
             - curl -LsSf https://astral.sh/uv/install.sh | sh
             - uv sync -vv
+
+    fmt:
+        desc: "Run autoformatting and linting"
+        cmds:
+            - uv pip install pre-commit
+            - uv run pre-commit install
+            - uv run pre-commit run --all-files
+
+    test:
+        desc: "Run the tests"
+        cmds:
+            - uv run pytest
+
+
+    clean:
+        desc: "Clean up caches and build artifacts"
+        cmds:
+            - git clean -X -d -f
