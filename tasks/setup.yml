@@ -1,54 +1,11 @@
 version: '3'
 
-vars:
-    TARGET: 3.11.6
-
 tasks:
-    pyenv_update:
-        desc: "Update available Python versions"
+    install:  
+        desc: "Install a virtual environment"
         internal: true
         cmds:
-            - echo "Updating available Python versions for pyenv"
-            - pyenv update
-
-
-    install_python:
-        desc: "Install the target Python version if not installed"
-        internal: true
-        cmds:
-            - |
-              if pyenv versions --bare | grep -q {{.TARGET}}; then
-                echo "Python {{.TARGET}} is already installed. Skipping installation.";
-              else
-                echo "Installing Python {{.TARGET}}...";
-                pyenv install {{.TARGET}};
-              fi
-        requires:
-            vars: [TARGET]
-
-    setup_poetry:
-        desc: "Set up poetry with the correct Python version"
-        internal: true
-        cmds:
-            - echo "Setting up poetry..."
-            - pyenv local {{.TARGET}}
-            - python -m pip install poetry
-            - poetry config virtualenvs.in-project true
-            - poetry env use {{.TARGET}}
-
-    clean_python_version:
-        desc: "Remove the local .python-version file"
-        internal: true
-        cmds:
-            - echo "Cleaning up .python-version file..."
-            - rm -f .python-version
-
-    python:
-        desc: "Update the Python version"
-        cmds:
-            - task: pyenv_update
-            - task: install_python
-            - task: setup_poetry
-            - task: clean_python_version
-        requires:
-            vars: [TARGET]
+	        - curl -LsSf https://astral.sh/uv/install.sh | sh
+	        - uv sync -vv
+	        - echo 'Please perform'
+	        - echo 'source .venv/bin/activate'
