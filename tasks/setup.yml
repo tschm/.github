@@ -28,10 +28,12 @@ tasks:
 
     coverage:
         desc: "test with coverage"
+        vars:
+            PACKAGE_PATH: '{{.PACKAGE_PATH| default "cvx"}}'
         cmds:
             - task: install
             - uv pip install pytest pytest-cov
-            - uv run coverage run --source=adia/. -m pytest
+            - uv run coverage run --source={{.PACKAGE_PATH}}/. -m pytest
             - uv run coverage report -m
             - uv run coverage html
             - cmd: open htmlcov/index.html
