@@ -1,5 +1,4 @@
 version: '3'
-
 tasks:
     install:
         desc: "Install a virtual environment"
@@ -26,10 +25,3 @@ tasks:
         desc: "Clean up caches and build artifacts"
         cmds:
             - git clean -X -d -f
-
-
-    default:
-        desc: "Install dependencies and run tests"
-        cmds:
-            - task: install
-            - task: test
