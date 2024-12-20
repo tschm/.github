@@ -2,9 +2,3 @@
 .task
 
 .DS_Store
-
-# Byte-compiled / optimized / DLL files
-.ruff_cache
-
-# C extensions
-*.so
