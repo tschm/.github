@@ -17,7 +17,7 @@ A more dated alternative is [poetry](https://python-poetry.org/).
 
 ## taskfile
 
-We highly recommend [task](https://taskfile.dev). We offer central taskfiles [here](tasks)
+We highly recommend [task](https://taskfile.dev). We offer central taskfiles [here](https://github.com/cvxgrp/.github/blob/main/tasks)
 
 ## Action workflows
 
@@ -32,13 +32,13 @@ We go through an incomplete list of example actions created for cvxgrp:
 This workflow is used to compile *.tex files.
 It uploads the generated documents to the draft branch.
 
-### [build](https://github.com/cvxgrp/.github/blob/main/actions/build/action.yml)
+### [build](https://github.com/cvxgrp/.github/blob/main/actions/uv/build/action.yml)
 
 This workflow is used to support the release of packages (to pypi).
 It assumes the project is built with poetry. It publishes the produced
 'dist' folder to a dedicated branch.
 
-### [test](https://github.com/cvxgrp/.github/blob/main/actions/test/action.yml)
+### [test](https://github.com/cvxgrp/.github/blob/main/actions/uv/test/action.yml)
 
 This workflow install pytest and some its friends.
 It uploads the test results as artifacts.
@@ -73,7 +73,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: cvxgrp/.github/actions/test@main
+    - uses: cvxgrp/.github/actions/uv/test@main
 
     - name: Coveralls GitHub Action
       uses: coverallsapp/github-action@v2
