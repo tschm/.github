@@ -44,7 +44,7 @@ runs:
           uv run sphinx-build -b html ${{ inputs.sphinx-folder || 'book/sphinx' }} artifacts/sphinx
 
       - name: Archive sphinx documentation
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: sphinx
           path: artifacts/sphinx
