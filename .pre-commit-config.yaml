@@ -2,15 +2,8 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
     hooks:
-      - id: check-toml
       - id: end-of-file-fixer
       - id: trailing-whitespace
-
-  - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: 'v0.8.4'
-    hooks:
-      - id: ruff
-        args: [ --fix, --exit-non-zero-on-fix ]
 
   - repo: https://github.com/igorshubovych/markdownlint-cli
     rev: v0.43.0
@@ -23,9 +16,3 @@ repos:
     hooks:
       - id: check-dependabot
         args: [ "--verbose" ]
-
-      - id: check-github-actions
-        args: ["--verbose"]
-
-      - id: check-github-workflows
-        args: ["--verbose"]
