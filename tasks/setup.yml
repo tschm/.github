@@ -4,7 +4,7 @@ tasks:
         desc: "Install a virtual environment"
         cmds:
             - curl -LsSf https://astral.sh/uv/install.sh | sh
-            - uv sync -vv
+            - uv sync -vv --frozen
 
     fmt:
         desc: "Run autoformatting and linting"
