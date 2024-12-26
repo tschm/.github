@@ -31,6 +31,8 @@ runs:
   steps:
     - name: Set up uv
       uses: cvxgrp/.github/actions/uv/setup@main
+      with:
+        python-version: '3.12'
 
     - name: Install and build pdoc
       shell: bash

@@ -26,6 +26,8 @@ runs:
   steps:
     - name: Set up Python environment
       uses: cvxgrp/.github/actions/uv/setup@main
+      with:
+        python-version: '3.12'
 
     - name: Run tests with coverage
       shell: bash

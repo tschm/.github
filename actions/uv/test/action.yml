@@ -24,9 +24,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
     - name: Set up Python environment
       uses: cvxgrp/.github/actions/uv/setup@main
       with:

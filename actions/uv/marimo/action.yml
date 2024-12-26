@@ -11,58 +11,60 @@
 #    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
-name: Convert Marimo *.py files to HTML for the book
+name: Convert Marimo to HTML
+description: "Converts Marimo .py files to HTML format for documentation"
 
-description: "Convert files for Marimo"
-
-on:
-  workflow_call:
-    inputs:
-      marimo_folder:
-        description: 'Folder with *.py files for Marimo'
-        type: string
-        required: false
-        default: 'book/marimo'
+inputs:
+  source_dir:
+    description: 'Source directory containing Marimo .py files'
+    required: false
+    default: 'book/marimo'
+  output_dir:
+    description: 'Output directory for HTML files'
+    required: false
+    default: 'artifacts/marimo'
 
 runs:
-    using: "composite"
+  using: composite
+  steps:
+    - uses: cvxgrp/.github/actions/uv/setup@main
+      with:
+        python-version: '3.12'
 
-    steps:
-      - uses: cvxgrp/.github/actions/uv/setup@main
+    - name: Install marimo
+      shell: bash
+      run: uv pip install --no-cache-dir marimo
 
-      - name: Install marimo
-        shell: bash
-        run: |
-          uv pip install --no-cache-dir marimo
+    - name: Create output directory
+      shell: bash
+      run: mkdir -p ${{ inputs.output_dir }}
 
+    - name: Convert Marimo files to HTML
+      shell: bash
+      run: |
+        if [ ! -d "${{ inputs.source_dir }}" ]; then
+          echo "Error: Source directory ${{ inputs.source_dir }} does not exist"
+          exit 1
+        fi
 
-      - name: Convert *.py files in book/marimo folder to html files
-        shell: bash
-        run: |
-          # Create a directory for HTML outputs if it doesn't exist
-          mkdir -p artifacts/marimo
+        found_files=0
+        for file in "${{ inputs.source_dir }}"/*.py; do
+          if [ -f "$file" ]; then
+            found_files=1
+            filename=$(basename "$file" .py)
+            echo "Converting $filename.py to HTML..."
+            uv run marimo export html "$file" -o "${{ inputs.output_dir }}/${filename}.html"
+          fi
+        done
 
-          # Loop through all .py files
-          for file in ${{ inputs.marimo_folder || 'book/marimo' }}/*.py; do
+        if [ "$found_files" -eq 0 ]; then
+          echo "Warning: No .py files found in ${{ inputs.source_dir }}"
+          exit 0
+        fi
 
-              echo $file
-
-              # Skip if file is not a regular file
-              [ -f "$file" ] || continue
-
-              # Extract filename without extension
-              filename=$(basename "$file" .py)
-              echo $filename
-
-              # Convert to HTML
-              echo "Converting $file to HTML..."
-              uv run marimo export html "$file" -o "artifacts/marimo/${filename}.html"
-              # uv run marimo export md "$file" -o "artifacts/marimo/${filename}.md"
-          done
-
-      - name: Archive marimo html
-        uses: actions/upload-artifact@v4
-        with:
-          name: marimo
-          path: artifacts/marimo
-          retention-days: 1
+    - name: Upload HTML artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: marimo-html
+        path: ${{ inputs.output_dir }}
+        retention-days: 1
