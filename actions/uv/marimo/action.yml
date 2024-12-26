@@ -33,7 +33,7 @@ runs:
       - name: Install marimo
         shell: bash
         run: |
-          uv pip install marimo
+          uv pip install --no-cache-dir marimo
 
 
       - name: Convert *.py files in book/marimo folder to html files
