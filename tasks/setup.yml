@@ -10,9 +10,9 @@ tasks:
         desc: "Run autoformatting and linting"
         cmds:
             - task: install
-            #- uv pip install pre-commit
-            - uvx pre-commit install
-            - uvx pre-commit run --all-files
+            - uv pip install pre-commit
+            - uv run pre-commit install
+            - uv run pre-commit run --all-files
 
     test:
         desc: "Run the tests"
@@ -47,5 +47,5 @@ tasks:
             MARIMO_PATH: '{{.MARIMO_PATH| default "book/marimo"}}'
         cmds:
             - task: install
-            - uv pip install marimo
-            - uv run marimo edit {{.MARIMO_PATH}}
+            #- uv pip install marimo
+            - uvx marimo edit {{.MARIMO_PATH}}
