@@ -18,10 +18,9 @@ runs:
     using: "composite"
 
     steps:
-      #- name: Check out repository
-      #- uses: actions/checkout@v4
-
       - uses: cvxgrp/.github/actions/uv/setup@main
+        with:
+          python-version: '3.12'
 
       - name: Install jupyterbook
         shell: bash

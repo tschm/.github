@@ -21,8 +21,8 @@ inputs:
     required: false
     default: '3.12'
 
-permissions:
-  contents: write
+#permissions:
+#  contents: write
 
 runs:
   using: "composite"
@@ -48,8 +48,8 @@ runs:
         path: dist
         retention-days: 1
 
-    - name: Publish to dist branch
-      uses: JamesIves/github-pages-deploy-action@v4
-      with:
-        branch: dist
-        folder: dist
+    #- name: Publish to dist branch
+    #  uses: JamesIves/github-pages-deploy-action@v4
+    #  with:
+    #    branch: dist
+    #    folder: dist
