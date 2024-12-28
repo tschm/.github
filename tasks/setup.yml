@@ -47,5 +47,5 @@ tasks:
             MARIMO_PATH: '{{.MARIMO_PATH| default "book/marimo"}}'
         cmds:
             - task: install
-            #- uv pip install marimo
-            - uvx marimo edit {{.MARIMO_PATH}}
+            - uv pip install marimo
+            - uv run marimo edit {{.MARIMO_PATH}}
