@@ -19,10 +19,6 @@ inputs:
     description: 'Source directory containing Marimo .py files'
     required: false
     default: 'book/marimo'
-  output_dir:
-    description: 'Output directory for HTML files'
-    required: false
-    default: 'artifacts/marimo'
 
 runs:
   using: composite
@@ -37,7 +33,7 @@ runs:
 
     - name: Create output directory
       shell: bash
-      run: mkdir -p ${{ inputs.output_dir }}
+      run: mkdir -p artifacts/marimo
 
     - name: Convert Marimo files to HTML
       shell: bash
@@ -53,7 +49,7 @@ runs:
             found_files=1
             filename=$(basename "$file" .py)
             echo "Converting $filename.py to HTML..."
-            uv run marimo export html "$file" -o "${{ inputs.output_dir }}/${filename}.html"
+            uv run marimo export html "$file" -o "artifacts/marimo/${filename}.html"
           fi
         done
 
@@ -66,5 +62,5 @@ runs:
       uses: actions/upload-artifact@v4
       with:
         name: marimo
-        path: ${{ inputs.output_dir }}
+        path: artifacts/marimo
         retention-days: 1
