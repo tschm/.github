@@ -65,6 +65,6 @@ runs:
     - name: Upload HTML artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: marimo-html
+        name: marimo
         path: ${{ inputs.output_dir }}
         retention-days: 1
