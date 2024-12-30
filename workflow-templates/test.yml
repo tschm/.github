@@ -1,4 +1,4 @@
-aaaaaaname: "test"
+name: "test"
 
 on:
 - push
