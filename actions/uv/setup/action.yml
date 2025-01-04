@@ -21,6 +21,11 @@ inputs:
     required: false
     default: '3.12'
 
+  working-directory:
+    description: 'Directory where the Python project is located'
+    required: false
+    default: '.'
+
 runs:
   using: "composite"
   steps:
@@ -39,5 +44,6 @@ runs:
     - name: Set up Python and install dependencies
       shell: bash
       run: |
+        cd ${{ inputs.working-directory }}
         uv python install ${{ inputs.python-version }}
         uv sync --all-extras --dev --frozen
