@@ -73,6 +73,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v4
+
     - uses: cvxgrp/.github/actions/uv/test@main
 
     - name: Coveralls GitHub Action
@@ -93,8 +95,7 @@ In pre-commit job we checkout the repository first and then
 run the 3rd party pre-commit/action step.
 
 In the test job we run the cvxgrp action performing
-all tests. The action would checkout the repository first.
-In the second step we share the coverage results
+all tests. We share the coverage results
 with yet another 3rdd party GitHub action.
 
 It is very common to use external GitHub actions.
