@@ -15,3 +15,4 @@ jobs:
         with:
           paper: XXX.tex
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          create-release: 'true'
