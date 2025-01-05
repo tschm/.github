@@ -20,22 +20,39 @@ inputs:
     type: string
     required: false
     default: 'book/sphinx'
+  python-version:
+    description: 'Python version to use'
+    required: false
+    default: '3.12'
+  working-directory:
+    description: 'Directory where the Python project is located'
+    required: false
+    default: '.'
 
 runs:
   using: "composite"
   steps:
-    - name: Set up uv
-      uses: cvxgrp/.github/actions/uv/setup@main
-      with:
-        python-version: '3.12'
+    - name: Install uv
+      shell: bash
+      run: |
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+        echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+
+    - name: Set up Python environment with uv
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: |
+        # Create venv with specific Python version
+        uv venv --python ${{ inputs.python-version }}
+        # Add venv to PATH
+        echo ".venv/bin" >> $GITHUB_PATH
+        uv sync --all-extras --dev --frozen
 
     - name: Install and build Sphinx
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
       run: |
-        uv pip install --no-cache-dir \
-          sphinx==7.2.6 \
-          sphinx-autoapi \
-          sphinx-rtd-theme
+        uv pip install --no-cache-dir sphinx==7.2.6 sphinx-autoapi sphinx-rtd-theme
         mkdir -p artifacts/sphinx
         uv run sphinx-build -b html ${{ inputs.sphinx-folder }} artifacts/sphinx
 
@@ -43,5 +60,5 @@ runs:
       uses: actions/upload-artifact@v3
       with:
         name: sphinx
-        path: artifacts/sphinx
+        path: ${{ inputs.working-directory }}/artifacts/sphinx
         retention-days: 1

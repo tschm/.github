@@ -19,24 +19,49 @@ inputs:
     description: 'Source directory containing Marimo .py files'
     required: false
     default: 'book/marimo'
+  working-directory:
+    description: 'Directory where the Python project is located'
+    required: false
+    default: '.'
+  python-version:
+    description: 'Python version to use'
+    required: false
+    default: '3.12'
 
 runs:
   using: composite
   steps:
-    - uses: cvxgrp/.github/actions/uv/setup@main
-      with:
-        python-version: '3.12'
+    - name: Install uv
+      shell: bash
+      run: |
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+        echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+
+    - name: Set up Python environment with uv
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: |
+        # Create venv with specific Python version
+        uv venv --python ${{ inputs.python-version }}
+        # Add venv to PATH
+        echo ".venv/bin" >> $GITHUB_PATH
+        uv sync --all-extras --dev --frozen
 
     - name: Install marimo
       shell: bash
-      run: uv pip install --no-cache-dir marimo
+      working-directory: ${{ inputs.working-directory }}
+      run: |
+        uv pip install --no-cache-dir marimo
 
     - name: Create output directory
       shell: bash
-      run: mkdir -p artifacts/marimo
+      working-directory: ${{ inputs.working-directory }}
+      run: |
+        mkdir -p artifacts/marimo
 
     - name: Convert Marimo files to HTML
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
       run: |
         if [ ! -d "${{ inputs.source_dir }}" ]; then
           echo "Error: Source directory ${{ inputs.source_dir }} does not exist"
@@ -62,5 +87,5 @@ runs:
       uses: actions/upload-artifact@v4
       with:
         name: marimo
-        path: artifacts/marimo
+        path: ${{ inputs.working-directory }}/artifacts/marimo
         retention-days: 1

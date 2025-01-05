@@ -20,20 +20,33 @@ inputs:
     type: string
     required: false
     default: '3.12'
-
-#permissions:
-#  contents: write
+  working-directory:
+    description: 'Directory where the Python project is located'
+    required: false
+    default: '.'
 
 runs:
   using: "composite"
 
   steps:
-    - name: Set up Python environment
-      uses: cvxgrp/.github/actions/uv/setup@main
-      with:
-        python-version: ${{ inputs.python-version }}
+    - name: Install uv
+      shell: bash
+      run: |
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+        echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+
+    - name: Set up Python environment with uv
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: |
+        # Create venv with specific Python version
+        uv venv --python ${{ inputs.python-version }}
+        # Add venv to PATH
+        echo ".venv/bin" >> $GITHUB_PATH
+        uv sync --all-extras --dev --frozen
 
     - name: Build package
+      working-directory: ${{ inputs.working-directory }}
       shell: bash
       run: |
         # Update version in pyproject.toml from git tag
@@ -45,11 +58,5 @@ runs:
       uses: actions/upload-artifact@v4
       with:
         name: dist
-        path: dist
+        path: ${{ inputs.working-directory }}/dist
         retention-days: 1
-
-    #- name: Publish to dist branch
-    #  uses: JamesIves/github-pages-deploy-action@v4
-    #  with:
-    #    branch: dist
-    #    folder: dist

@@ -14,30 +14,54 @@
 name: Build the Jupyter Book
 description: "Build jupyter book"
 
+inputs:
+  working-directory:
+    description: 'Directory where the Python project is located'
+    required: false
+    default: '.'
+  python-version:
+    description: 'Python version to use'
+    required: false
+    default: '3.12'
+
 runs:
-    using: "composite"
+  using: "composite"
 
-    steps:
-      - uses: cvxgrp/.github/actions/uv/setup@main
-        with:
-          python-version: '3.12'
+  steps:
+    - name: Install uv
+      shell: bash
+      run: |
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+        echo "$HOME/.cargo/bin" >> $GITHUB_PATH
 
-      - name: Install jupyterbook
-        shell: bash
-        run: |
-          uv pip install --no-cache-dir jupyter-book sphinx-math-dollar
+    - name: Set up Python environment with uv
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: |
+        # Create venv with specific Python version
+        uv venv --python ${{ inputs.python-version }}
+        # Add venv to PATH
+        echo ".venv/bin" >> $GITHUB_PATH
+        uv sync --all-extras --dev --frozen
 
-      # Build the book
-      - name: Build the book
-        shell: bash
-        run: |
-          uv run jupyter-book clean book
-          uv run jupyter-book build book
+    - name: Install jupyterbook
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: |
+        uv pip install --no-cache-dir jupyter-book sphinx-math-dollar
 
-      # Upload the book
-      - name: Archive book
-        uses: actions/upload-artifact@v4
-        with:
-          name: book
-          path: book/_build/html/
-          retention-days: 1
+    # Build the book
+    - name: Build the book
+      shell: bash
+      run: |
+        cd ${{ inputs.working-directory }}
+        uv run jupyter-book clean book
+        uv run jupyter-book build book
+
+    # Upload the book
+    - name: Archive book
+      uses: actions/upload-artifact@v4
+      with:
+        name: book
+        path: ${{ inputs.working-directory }}/book/_build/html/
+        retention-days: 1
