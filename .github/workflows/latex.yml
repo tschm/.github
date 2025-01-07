@@ -20,7 +20,7 @@ jobs:
         with:
           paper: ".github/hello-paper/main.tex"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          create-release: 'true'
+          create-release: false
 
       #- name: Upload build artifacts
       #  uses: actions/upload-artifact@v4
