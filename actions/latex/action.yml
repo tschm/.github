@@ -45,7 +45,7 @@ inputs:
     description: 'Create a GitHub release with compiled PDFs'
     type: boolean
     required: false
-    default: false
+    default: true
   GITHUB_TOKEN:
     required: true
 
