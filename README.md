@@ -20,7 +20,7 @@ We have removed the poetry based action
 - actions/coverage@main
 - actions/book@main
 
-You have two options. You can either use cvxgrp/.github/actions/test@v1.2.0
+You have two options. You can either use cvxgrp/.github/actions/test@v1.4.0
 where all those actions are still present or move to uv.
 
 ## uv
