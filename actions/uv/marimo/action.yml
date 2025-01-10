@@ -15,7 +15,7 @@ name: Convert Marimo to HTML
 description: "Converts Marimo .py files to HTML format for documentation"
 
 inputs:
-  source_dir:
+  source_folder:
     description: 'Source directory containing Marimo .py files'
     required: false
     default: 'book/marimo'
@@ -63,13 +63,13 @@ runs:
       shell: bash
       working-directory: ${{ inputs.working-directory }}
       run: |
-        if [ ! -d "${{ inputs.source_dir }}" ]; then
-          echo "Error: Source directory ${{ inputs.source_dir }} does not exist"
+        if [ ! -d "${{ inputs.source_folder }}" ]; then
+          echo "Error: Source directory ${{ inputs.source_folder }} does not exist"
           exit 1
         fi
 
         found_files=0
-        for file in "${{ inputs.source_dir }}"/*.py; do
+        for file in "${{ inputs.source_folder }}"/*.py; do
           if [ -f "$file" ]; then
             found_files=1
             filename=$(basename "$file" .py)
@@ -79,7 +79,7 @@ runs:
         done
 
         if [ "$found_files" -eq 0 ]; then
-          echo "Warning: No .py files found in ${{ inputs.source_dir }}"
+          echo "Warning: No .py files found in ${{ inputs.source_folder }}"
           exit 0
         fi
 
