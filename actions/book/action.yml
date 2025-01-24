@@ -23,6 +23,7 @@ runs:
       uses: actions/checkout@v4
 
     - name: Download all artifacts
+      if: ${{ env.ACT != 'true' }}  # Skip if running with 'act'
       uses: actions/download-artifact@v4
       with:
         path: .book
@@ -35,5 +36,5 @@ runs:
       if: ${{ env.ACT != 'true' }}  # Skip if running with 'act'
       uses: JamesIves/github-pages-deploy-action@v4
       with:
-        branch: gh-pages          # The branch the action should deploy to.
-        folder: .book             # The folder the action should deploy.
+        branch: gh-pages            # The branch the action should deploy to.
+        folder: .book               # The folder the action should deploy.

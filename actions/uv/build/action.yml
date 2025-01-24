@@ -63,8 +63,9 @@ runs:
       run: |
         # Update version in pyproject.toml from git tag
         sed -i -e "s/0.0.0/${GITHUB_REF#refs/*/}/" pyproject.toml
+        uv pip install hatch
         # Build the package
-        uv build
+        hatch build
 
     - name: Upload build artifacts
       if: ${{ env.ACT != 'true' }}  # Skip if running with 'act'
