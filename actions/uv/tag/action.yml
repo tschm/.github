@@ -1,11 +1,14 @@
 name: "Bump version and create release"
 description: "Bumps version, creates a tag, and publishes a release."
-author: "Your Name"
 
 inputs:
   github_token:
     description: "GitHub token for authentication"
     required: true
+  python_version:
+    description: 'Python version to use for the build'
+    required: false
+    default: '3.12'
 
 runs:
   using: "composite"
@@ -25,7 +28,7 @@ runs:
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.12'
+        python-version: ${{ inputs.python_version }}
 
     - name: Install hatch
       shell: bash
