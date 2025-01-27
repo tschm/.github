@@ -7,9 +7,8 @@ inputs:
     description: "GitHub token for authentication"
     required: true
 
-outputs:
-  tag:
-    description: "The new tag created by the action"
+#outputs:
+#    description: "The new tag created by the action"
 
 runs:
   using: "composite"
