@@ -7,9 +7,6 @@ inputs:
     description: "GitHub token for authentication"
     required: true
 
-#outputs:
-#    description: "The new tag created by the action"
-
 runs:
   using: "composite"
   steps:
@@ -38,3 +35,16 @@ runs:
     - name: Set output
       shell: bash
       run: echo "tag=${{ steps.tag_version.outputs.new_tag }}" >> $GITHUB_ENV
+
+    - name: Build package
+      shell: bash
+      run: |
+        echo "Environment ${{ env.tag }}"
+        sed -i "s/0.0.0/${{ env.tag }}/" pyproject.toml
+        # Constructs the dist folder
+        hatch build
+
+    - uses: actions/upload-artifact@v4
+      with:
+        name: dist
+        path: dist
