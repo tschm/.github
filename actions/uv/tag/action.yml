@@ -26,6 +26,16 @@ runs:
         tag_name: ${{ steps.tag_version.outputs.new_tag }}
         generate_release_notes: true
 
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Install hatch
+      shell: bash
+      run: |
+        pip install hatch
+
     - name: Set output
       shell: bash
       run: echo "tag=${{ steps.tag_version.outputs.new_tag }}" >> $GITHUB_ENV
