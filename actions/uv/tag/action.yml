@@ -13,45 +13,55 @@ inputs:
 runs:
   using: "composite"
   steps:
+    # -----------------------------------------------------------------------------
+    # Step 1: Bump version and tag
+    # -----------------------------------------------------------------------------
     - name: Bump version and tag
       id: tag_version
       uses: mathieudutour/github-tag-action@v6.2
       with:
         github_token: ${{ inputs.github_token }}
 
+    # -----------------------------------------------------------------------------
+    # Step 2: Create GitHub release
+    # -----------------------------------------------------------------------------
     - name: Create GitHub release
       uses: softprops/action-gh-release@v2
       with:
         tag_name: ${{ steps.tag_version.outputs.new_tag }}
         generate_release_notes: true
 
-    #- name: Set output
-    #  shell: bash
-    #  run: echo "tag=${{ steps.tag_version.outputs.new_tag }}" >> $GITHUB_ENV
-
-    - name: Setup Python
+    # -----------------------------------------------------------------------------
+    # Step 3: Set up Python environment for the build process
+    # -----------------------------------------------------------------------------
+    - name: Setup Python environment
       uses: actions/setup-python@v5
       with:
         python-version: ${{ inputs.python_version }}
 
-    - name: Install hatch
+    # -----------------------------------------------------------------------------
+    # Step 4: Install dependencies (hatch for packaging)
+    # -----------------------------------------------------------------------------
+    - name: Install dependencies
       shell: bash
       run: |
         pip install hatch
 
-    # The Build package step updates the version in pyproject.toml
-    # using the newly generated tag and then runs hatch build to create
-    # the distribution.
+    # -----------------------------------------------------------------------------
+    # Step 5: Build the package using the updated version from the tag
+    # -----------------------------------------------------------------------------
     - name: Build package
       shell: bash
       run: |
-        echo "Environment ${{ steps.tag_version.outputs.new_tag }}"
+        echo "Building package for version: ${{ steps.tag_version.outputs.new_tag }}"
+        # Update the version in pyproject.toml to match the tag
         sed -i "s/0.0.0/${{ steps.tag_version.outputs.new_tag }}/" pyproject.toml
-        # Constructs the dist folder
+        # Build the distribution package
         hatch build
 
-    # The build output is uploaded and eventually picked up
-    # for publication on PyPI
+    # -----------------------------------------------------------------------------
+    # Step 6: Upload the build artifacts (distribution)
+    # -----------------------------------------------------------------------------
     - uses: actions/upload-artifact@v4
       with:
         name: dist
