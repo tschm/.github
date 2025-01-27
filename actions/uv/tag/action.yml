@@ -25,6 +25,10 @@ runs:
         tag_name: ${{ steps.tag_version.outputs.new_tag }}
         generate_release_notes: true
 
+    #- name: Set output
+    #  shell: bash
+    #  run: echo "tag=${{ steps.tag_version.outputs.new_tag }}" >> $GITHUB_ENV
+
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
@@ -35,18 +39,19 @@ runs:
       run: |
         pip install hatch
 
-    - name: Set output
-      shell: bash
-      run: echo "tag=${{ steps.tag_version.outputs.new_tag }}" >> $GITHUB_ENV
-
+    # The Build package step updates the version in pyproject.toml
+    # using the newly generated tag and then runs hatch build to create
+    # the distribution.
     - name: Build package
       shell: bash
       run: |
-        echo "Environment ${{ env.tag }}"
-        sed -i "s/0.0.0/${{ env.tag }}/" pyproject.toml
+        echo "Environment ${{ steps.tag_version.outputs.new_tag }}"
+        sed -i "s/0.0.0/${{ steps.tag_version.outputs.new_tag }}/" pyproject.toml
         # Constructs the dist folder
         hatch build
 
+    # The build output is uploaded and eventually picked up
+    # for publication on PyPI
     - uses: actions/upload-artifact@v4
       with:
         name: dist
