@@ -27,4 +27,5 @@ runs:
         generate_release_notes: true
 
     - name: Set output
+      shell: bash
       run: echo "tag=${{ steps.tag_version.outputs.new_tag }}" >> $GITHUB_ENV
