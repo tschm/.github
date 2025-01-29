@@ -72,7 +72,18 @@ runs:
         hatch build
 
     # -----------------------------------------------------------------------------
-    # Step 7: Create GitHub release
+    # Step 7: Upload build artifacts
+    # -----------------------------------------------------------------------------
+    - name: Upload distribution artifacts
+      if: inputs.build_package == 'true'
+      uses: actions/upload-artifact@v4
+      with:
+        name: dist
+        path: dist/
+        retention-days: 1
+
+    # -----------------------------------------------------------------------------
+    # Step 8: Create GitHub release
     # -----------------------------------------------------------------------------
     - name: Create GitHub release with artifacts
       if: inputs.build_package == 'true'
@@ -80,9 +91,7 @@ runs:
       with:
         tag_name: ${{ steps.tag_version.outputs.new_tag }}
         generate_release_notes: true
-        files: |
-          dist/*.whl
-          dist/*.tar.gz
+        files: dist/*
 
     - name: Create GitHub release without artifacts
       if: inputs.build_package != 'true'
