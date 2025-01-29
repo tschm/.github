@@ -9,6 +9,10 @@ inputs:
     description: 'Python version to use for the build'
     required: false
     default: '3.12'
+  build_package:
+    description: 'Whether to build and include package artifacts in the release'
+    required: false
+    default: 'true'
 
 runs:
   using: "composite"
@@ -32,6 +36,7 @@ runs:
     # Step 3: Set up Python environment
     # -----------------------------------------------------------------------------
     - name: Set up Python ${{ inputs.python_version }}
+      if: inputs.build_package == 'true'
       uses: actions/setup-python@v5
       with:
         python-version: ${{ inputs.python_version }}
@@ -41,6 +46,7 @@ runs:
     # Step 4: Install dependencies (hatch for packaging)
     # -----------------------------------------------------------------------------
     - name: Install dependencies
+      if: inputs.build_package == 'true'
       shell: bash
       run: |
         python -m pip install --upgrade pip hatch
@@ -49,6 +55,7 @@ runs:
     # Step 5: Update version in pyproject.toml
     # -----------------------------------------------------------------------------
     - name: Update version in pyproject.toml
+      if: inputs.build_package == 'true'
       shell: bash
       run: |
         echo "Updating version to ${{ steps.tag_version.outputs.new_tag }}"
@@ -58,6 +65,7 @@ runs:
     # Step 6: Build the package
     # -----------------------------------------------------------------------------
     - name: Build package
+      if: inputs.build_package == 'true'
       shell: bash
       run: |
         echo "Building package for version: ${{ steps.tag_version.outputs.new_tag }}"
@@ -66,7 +74,8 @@ runs:
     # -----------------------------------------------------------------------------
     # Step 7: Create GitHub release
     # -----------------------------------------------------------------------------
-    - name: Create GitHub release
+    - name: Create GitHub release with artifacts
+      if: inputs.build_package == 'true'
       uses: softprops/action-gh-release@v2
       with:
         tag_name: ${{ steps.tag_version.outputs.new_tag }}
@@ -75,11 +84,9 @@ runs:
           dist/*.whl
           dist/*.tar.gz
 
-    # -----------------------------------------------------------------------------
-    # Step 8: Upload build artifacts
-    # -----------------------------------------------------------------------------
-    - name: Upload build artifacts
-      uses: actions/upload-artifact@v4
+    - name: Create GitHub release without artifacts
+      if: inputs.build_package != 'true'
+      uses: softprops/action-gh-release@v2
       with:
-        name: dist
-        path: dist
+        tag_name: ${{ steps.tag_version.outputs.new_tag }}
+        generate_release_notes: true
