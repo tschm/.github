@@ -13,3 +13,13 @@ jobs:
       - uses: ./actions/uv/deptry
         with:
           working-directory: '.github/hello-world'
+
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout [${{ github.repository }}]
+        uses: actions/checkout@v4
+
+      - uses: pre-commit/action@v3.0.1
+        with:
+          extra_args: '--verbose --all-files'
