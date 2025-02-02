@@ -31,7 +31,7 @@ jobs:
         - name: Checkout [${{ github.repository }}]
           uses: actions/checkout@v4
 
-        - uses: ./actions/uv/sphinx
+        - uses: ./actions/sphinx
           with:
             working-directory: .github/hello-world
 
@@ -41,7 +41,7 @@ jobs:
         - name: Checkout [${{ github.repository }}]
           uses: actions/checkout@v4
 
-        - uses: ./actions/uv/coverage
+        - uses: ./actions/coverage
           with:
             working-directory: .github/hello-world
             coveralls: 'false'
@@ -52,7 +52,7 @@ jobs:
         - name: Checkout [${{ github.repository }}]
           uses: actions/checkout@v4
 
-        - uses: ./actions/uv/jupyter
+        - uses: ./actions/jupyter
           with:
             working-directory: .github/hello-world
 

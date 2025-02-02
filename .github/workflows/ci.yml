@@ -17,6 +17,6 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Test a project
-        uses: ./actions/uv/test
+        uses: ./actions/test
         with:
           working-directory: .github/hello-world
