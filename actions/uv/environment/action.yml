@@ -54,3 +54,9 @@ runs:
         # Add venv to PATH
         echo ".venv/bin" >> $GITHUB_PATH
         uv sync --all-extras --dev --frozen
+
+    - name: Activate the environment
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: |
+        source .venv/bin/activate
