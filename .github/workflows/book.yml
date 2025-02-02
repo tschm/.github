@@ -12,6 +12,8 @@ jobs:
           uses: actions/checkout@v4
 
         - uses: ./actions/uv/environment
+          with:
+            working-directory: '.github/hello-world'
 
         - uses: ./actions/marimo
           with:
@@ -24,6 +26,8 @@ jobs:
           uses: actions/checkout@v4
 
         - uses: ./actions/uv/environment
+          with:
+            working-directory: '.github/hello-world'
 
         - uses: ./actions/pdoc
           with:
