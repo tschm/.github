@@ -35,7 +35,7 @@ runs:
       shell: bash
       working-directory: ${{ inputs.working-directory }}
       run: |
-        pip install --no-cache-dir marimo
+        python -m pip install --no-cache-dir marimo
 
     - name: Create output directory
       shell: bash

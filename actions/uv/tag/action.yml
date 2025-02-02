@@ -5,10 +5,10 @@ inputs:
   github_token:
     description: "GitHub token for authentication"
     required: true
-  python_version:
-    description: 'Python version to use for the build'
-    required: false
-    default: '3.12'
+  #python_version:
+  #  description: 'Python version to use for the build'
+  #  required: false
+  #  default: '3.12'
   build_package:
     description: 'Whether to build and include package artifacts in the release'
     required: false
@@ -20,8 +20,8 @@ runs:
     # -----------------------------------------------------------------------------
     # Step 1: Checkout the repository
     # -----------------------------------------------------------------------------
-    - name: Checkout [${{ github.repository }}]
-      uses: actions/checkout@v4
+    #- name: Checkout [${{ github.repository }}]
+    #  uses: actions/checkout@v4
 
     # -----------------------------------------------------------------------------
     # Step 2: Bump version and tag
@@ -35,12 +35,12 @@ runs:
     # -----------------------------------------------------------------------------
     # Step 3: Set up Python environment
     # -----------------------------------------------------------------------------
-    - name: Set up Python ${{ inputs.python_version }}
-      if: inputs.build_package == 'true'
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ inputs.python_version }}
-        cache: 'pip'  # Enable caching for pip dependencies
+    #- name: Set up Python ${{ inputs.python_version }}
+    #  if: inputs.build_package == 'true'
+    #  uses: actions/setup-python@v5
+    #  with:
+    #    python-version: ${{ inputs.python_version }}
+    #    cache: 'pip'  # Enable caching for pip dependencies
 
     # -----------------------------------------------------------------------------
     # Step 4: Install dependencies (hatch for packaging)
@@ -49,7 +49,7 @@ runs:
       if: inputs.build_package == 'true'
       shell: bash
       run: |
-        python -m pip install --upgrade pip hatch
+        python -m pip install --upgrade hatch
 
     # -----------------------------------------------------------------------------
     # Step 5: Update version in pyproject.toml

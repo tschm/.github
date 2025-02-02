@@ -32,37 +32,13 @@ inputs:
 runs:
   using: "composite"
   steps:
-#    - name: Checkout [${{ github.repository }}]
-#      uses: actions/checkout@v4
-#
-#    # This is not using any github-token:
-#    - name: Install uv
-#      shell: bash
-#      run: |
-#        curl -LsSf https://astral.sh/uv/install.sh | sh
-#
-#        # Add UV to PATH for the current shell session
-#        echo "$HOME/.local/bin" >> $GITHUB_PATH   # Add UV binary directory to PATH in GitHub Actions environment
-#        export PATH="$HOME/.local/bin:$PATH"      # Add UV binary directory to PATH for the current shell session
-#
-#        # "Verify UV installation"
-#        uv --version  # Should print the installed version of UV
-#
-#    - name: Set up Python environment with uv
-#      shell: bash
-#      working-directory: ${{ inputs.working-directory }}
-#      run: |
-#        # Create venv
-#        uv venv --python ${{ inputs.python-version }}
-#        # Add venv to PATH
-#        echo ".venv/bin" >> $GITHUB_PATH
-#        uv sync --all-extras --dev --frozen
-
     - name: Install and build Sphinx
       shell: bash
       working-directory: ${{ inputs.working-directory }}
       run: |
-        pip install --no-cache-dir sphinx==7.2.6 sphinx-autoapi sphinx-rtd-theme
+        which python
+        which pip
+        python -m pip install --no-cache-dir sphinx==7.2.6 sphinx-autoapi sphinx-rtd-theme
         mkdir -p artifacts/sphinx
         sphinx-build -b html ${{ inputs.sphinx-folder }} artifacts/sphinx
 

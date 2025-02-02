@@ -44,15 +44,11 @@ runs:
       shell: bash
       working-directory: ${{ inputs.working-directory }}
       run: |
-        # which pytest
         # this should point to .venv/bin/python
         which python
-        #which pip
 
         # Install coverage tools separately to ensure they don't conflict
         python -m pip install --no-cache-dir pytest pytest-cov pytest-html pytest-random-order
-
-        #which pytest
 
         # Create output directories
         mkdir -p artifacts/tests/{html-report,coverage,html-coverage}
