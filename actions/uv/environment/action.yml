@@ -59,10 +59,10 @@ runs:
       shell: bash
       working-directory: ${{ inputs.working-directory }}
       run: |
-        source .venv/bin/activate
-        which pip
-        which python
+        # source .venv/bin/activate
+        # which pip
+        # which python
         # Make sure pip is installed
-        python -m ensurepip --upgrade
-        which pip
+        uv run python -m ensurepip --upgrade
+        #which pip
         which python
