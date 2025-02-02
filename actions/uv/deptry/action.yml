@@ -63,4 +63,5 @@ runs:
       run: |
         which pip
         pip install --no-cache-dir deptry
+        uv pip install --no-cache-dir deptry
         deptry ${{ inputs.source-folder }}
