@@ -11,7 +11,7 @@ jobs:
         - name: Checkout [${{ github.repository }}]
           uses: actions/checkout@v4
 
-        - uses: ./actions/uv/marimo
+        - uses: ./actions/marimo
           with:
             working-directory: .github/hello-world
 
@@ -21,7 +21,7 @@ jobs:
         - name: Checkout [${{ github.repository }}]
           uses: actions/checkout@v4
 
-        - uses: ./actions/uv/pdoc
+        - uses: ./actions/pdoc
           with:
             working-directory: .github/hello-world
 
