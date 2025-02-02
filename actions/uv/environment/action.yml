@@ -19,6 +19,10 @@ inputs:
     description: 'Directory where the Python project is located'
     required: false
     default: '.'
+  python-version:
+    description: 'The Python we shall use'
+    required: false
+    default: '3.12'
 
 runs:
   using: "composite"
