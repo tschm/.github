@@ -45,6 +45,7 @@ runs:
       working-directory: ${{ inputs.working-directory }}
       run: |
         which pytest
+        which pip
 
         # Install coverage tools separately to ensure they don't conflict
         pip install --no-cache-dir pytest pytest-cov pytest-html pytest-random-order
