@@ -11,6 +11,8 @@ jobs:
         - name: Checkout [${{ github.repository }}]
           uses: actions/checkout@v4
 
+        - uses: ./actions/uv/environment
+
         - uses: ./actions/marimo
           with:
             working-directory: .github/hello-world
@@ -20,6 +22,8 @@ jobs:
       steps:
         - name: Checkout [${{ github.repository }}]
           uses: actions/checkout@v4
+
+        - uses: ./actions/uv/environment
 
         - uses: ./actions/pdoc
           with:
@@ -31,6 +35,8 @@ jobs:
         - name: Checkout [${{ github.repository }}]
           uses: actions/checkout@v4
 
+        - uses: ./actions/uv/environment
+
         - uses: ./actions/sphinx
           with:
             working-directory: .github/hello-world
@@ -40,6 +46,8 @@ jobs:
       steps:
         - name: Checkout [${{ github.repository }}]
           uses: actions/checkout@v4
+
+        - uses: ./actions/uv/environment
 
         - uses: ./actions/coverage
           with:
