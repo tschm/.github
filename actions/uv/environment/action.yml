@@ -61,3 +61,8 @@ runs:
       run: |
         source .venv/bin/activate
         which pip
+        which python
+        # Make sure pip is installed
+        python -m ensurepip --upgrade
+        which pip
+        which python
