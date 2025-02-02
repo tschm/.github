@@ -28,45 +28,45 @@ runs:
   using: "composite"
 
   steps:
-    - name: Checkout [${{ github.repository }}]
-      uses: actions/checkout@v4
-
-    # This is not using any github-token:
-    - name: Install uv
-      shell: bash
-      run: |
-        curl -LsSf https://astral.sh/uv/install.sh | sh
-
-        # Add UV to PATH for the current shell session
-        echo "$HOME/.local/bin" >> $GITHUB_PATH   # Add UV binary directory to PATH in GitHub Actions environment
-        export PATH="$HOME/.local/bin:$PATH"      # Add UV binary directory to PATH for the current shell session
-
-        # "Verify UV installation"
-        uv --version  # Should print the installed version of UV
-
-    - name: Set up Python environment with uv
-      shell: bash
-      working-directory: ${{ inputs.working-directory }}
-      run: |
-        # Create venv
-        uv venv --python ${{ inputs.python-version }}
-        # Add venv to PATH
-        echo ".venv/bin" >> $GITHUB_PATH
-        uv sync --all-extras --dev --frozen
+#    - name: Checkout [${{ github.repository }}]
+#      uses: actions/checkout@v4
+#
+#    # This is not using any github-token:
+#    - name: Install uv
+#      shell: bash
+#      run: |
+#        curl -LsSf https://astral.sh/uv/install.sh | sh
+#
+#        # Add UV to PATH for the current shell session
+#        echo "$HOME/.local/bin" >> $GITHUB_PATH   # Add UV binary directory to PATH in GitHub Actions environment
+#        export PATH="$HOME/.local/bin:$PATH"      # Add UV binary directory to PATH for the current shell session
+#
+#        # "Verify UV installation"
+#        uv --version  # Should print the installed version of UV
+#
+#    - name: Set up Python environment with uv
+#      shell: bash
+#      working-directory: ${{ inputs.working-directory }}
+#      run: |
+#        # Create venv
+#        uv venv --python ${{ inputs.python-version }}
+#        # Add venv to PATH
+#        echo ".venv/bin" >> $GITHUB_PATH
+#        uv sync --all-extras --dev --frozen
 
     - name: Install jupyterbook
       shell: bash
       working-directory: ${{ inputs.working-directory }}
       run: |
-        uv pip install --no-cache-dir jupyter-book sphinx-math-dollar
+        pip install --no-cache-dir jupyter-book sphinx-math-dollar
 
     # Build the book
     - name: Build the book
       shell: bash
       run: |
         cd ${{ inputs.working-directory }}
-        uv run jupyter-book clean book
-        uv run jupyter-book build book
+        jupyter-book clean book
+        jupyter-book build book
 
     # Upload the book
     - name: Archive book

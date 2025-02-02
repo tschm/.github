@@ -40,44 +40,44 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Checkout [${{ github.repository }}]
-      uses: actions/checkout@v4
-
-    # This is not using any github-token:
-    - name: Install uv
-      shell: bash
-      run: |
-        curl -LsSf https://astral.sh/uv/install.sh | sh
-
-        # Add UV to PATH for the current shell session
-        echo "$HOME/.local/bin" >> $GITHUB_PATH   # Add UV binary directory to PATH in GitHub Actions environment
-        export PATH="$HOME/.local/bin:$PATH"      # Add UV binary directory to PATH for the current shell session
-
-        # "Verify UV installation"
-        uv --version  # Should print the installed version of UV
-
-    - name: Set up Python environment with uv
-      shell: bash
-      working-directory: ${{ inputs.working-directory }}
-      run: |
-        # Create venv
-        uv venv --python ${{ inputs.python-version }}
-        # Add venv to PATH
-        echo ".venv/bin" >> $GITHUB_PATH
-        uv sync --all-extras --dev --frozen
+#    - name: Checkout [${{ github.repository }}]
+#      uses: actions/checkout@v4
+#
+#    # This is not using any github-token:
+#    - name: Install uv
+#      shell: bash
+#      run: |
+#        curl -LsSf https://astral.sh/uv/install.sh | sh
+#
+#        # Add UV to PATH for the current shell session
+#        echo "$HOME/.local/bin" >> $GITHUB_PATH   # Add UV binary directory to PATH in GitHub Actions environment
+#        export PATH="$HOME/.local/bin:$PATH"      # Add UV binary directory to PATH for the current shell session
+#
+#        # "Verify UV installation"
+#        uv --version  # Should print the installed version of UV
+#
+#    - name: Set up Python environment with uv
+#      shell: bash
+#      working-directory: ${{ inputs.working-directory }}
+#      run: |
+#        # Create venv
+#        uv venv --python ${{ inputs.python-version }}
+#        # Add venv to PATH
+#        echo ".venv/bin" >> $GITHUB_PATH
+#        uv sync --all-extras --dev --frozen
 
     - name: Run tests with coverage
       shell: bash
       working-directory: ${{ inputs.working-directory }}
       run: |
         # Install coverage tools separately to ensure they don't conflict
-        uv pip install --no-cache-dir pytest pytest-cov pytest-html pytest-random-order
+        pip install --no-cache-dir pytest pytest-cov pytest-html pytest-random-order
 
         # Create output directories
         mkdir -p artifacts/tests/{html-report,coverage,html-coverage}
 
         # Run pytest with coverage reporting
-        uv run pytest \
+        pytest \
           --cov=${{ inputs.source-folder }} \
           --random-order \
           --verbose \
