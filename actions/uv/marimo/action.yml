@@ -84,7 +84,7 @@ runs:
             found_files=1
             filename=$(basename "$file" .py)
             echo "Converting $filename.py to HTML..."
-            uv run marimo export html "$file" -o "artifacts/marimo/${filename}.html"
+            marimo export html "$file" -o "artifacts/marimo/${filename}.html"
           fi
         done
 
