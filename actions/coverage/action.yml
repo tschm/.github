@@ -28,10 +28,6 @@ inputs:
     description: 'Directory where the Python project is located'
     required: false
     default: '.'
-  python-version:
-    description: 'Python version to use'
-    required: false
-    default: '3.12'
   coveralls:
     description: 'Upload to coverallsapp'
     required: false

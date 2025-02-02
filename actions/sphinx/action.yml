@@ -20,10 +20,6 @@ inputs:
     type: string
     required: false
     default: 'book/sphinx'
-  python-version:
-    description: 'Python version to use'
-    required: false
-    default: '3.12'
   working-directory:
     description: 'Directory where the Python project is located'
     required: false

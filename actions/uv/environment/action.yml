@@ -15,11 +15,6 @@ name: Build Package
 description: "Build Python package and publish artifacts"
 
 inputs:
-  python-version:
-    description: 'Python version to use for building'
-    type: string
-    required: false
-    default: '3.12'
   working-directory:
     description: 'Directory where the Python project is located'
     required: false
@@ -34,7 +29,6 @@ runs:
 
     # Install UV (only on Linux/macOS)
     - name: Install uv
-      if: runner.os != 'Windows'
       shell: bash
       run: |
         curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -43,7 +37,6 @@ runs:
         uv --version  # Verify UV installation
 
     - name: Set up Python environment with uv
-      if: runner.os != 'Windows'
       shell: bash
       working-directory: ${{ inputs.working-directory }}
       run: |
