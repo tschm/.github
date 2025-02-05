@@ -33,30 +33,20 @@ To take full advantage of the actions given here we recommend using
 It allows to create and manage virtual environments.
 A more dated alternative is [poetry](https://python-poetry.org/).
 
-## taskfile
-
-We highly recommend [task](https://taskfile.dev). We offer central taskfiles [here](https://github.com/cvxgrp/.github/blob/main/tasks)
-
 ## Action workflows
 
 Github workflows can help to robustify and to automate
 the process of creating software and documents.
 We recommend [Github introduction](https://docs.github.com/actions).
 
-We go through an incomplete list of example actions created for cvxgrp:
+We list two example actions created for cvxgrp:
 
 ### [latex](https://github.com/cvxgrp/.github/blob/main/actions/latex/action.yml)
 
 This workflow is used to compile *.tex files.
 It uploads the generated documents to the draft branch.
 
-### [build](https://github.com/cvxgrp/.github/blob/main/actions/uv/build/action.yml)
-
-This workflow is used to support the release of packages (to pypi).
-It assumes the project is built with poetry. It publishes the produced
-'dist' folder to a dedicated branch.
-
-### [test](https://github.com/cvxgrp/.github/blob/main/actions/uv/test/action.yml)
+### [test](https://github.com/cvxgrp/.github/blob/main/actions/test/action.yml)
 
 This workflow install pytest and some its friends.
 It uploads the test results as artifacts.
