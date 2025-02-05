@@ -103,7 +103,7 @@ Both these jobs run on a ubuntu machine.
 Each job consists of at least one step.
 The steps are the actions that will be executed.
 
-In the test job we run the cvxgrp action building a 
+In the test job we run the cvxgrp action building a
 virtual environment before performing all tests
 and measuring test coverage.
 
