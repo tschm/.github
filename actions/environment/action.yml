@@ -95,10 +95,3 @@ runs:
         python -m ensurepip --upgrade
         # Confirm python and pip are from the virtual environment
         python -m pip --version
-
-    #- name: Test pip
-    #  shell: bash
-    #  run : |
-    #    which pip
-    #    echo "Pip version: "
-    #    python -m pip --version
