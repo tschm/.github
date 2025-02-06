@@ -95,3 +95,9 @@ runs:
       run : |
         # Sync environment (install dependencies)
         uv pip install -r requirements.txt
+
+    - name: Test pip
+      shell: bash
+      run : |
+        which pip
+        pip --version
