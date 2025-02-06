@@ -21,3 +21,4 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - uses: cvxgrp/.github/actions/test@main
+        tests-folder: 'src/tests'

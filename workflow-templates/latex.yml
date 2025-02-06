@@ -13,6 +13,7 @@ jobs:
 
       - uses: cvxgrp/.github/actions/latex@main
         with:
+          # point to the correct file
           paper: XXX.tex
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           create-release: 'true'
