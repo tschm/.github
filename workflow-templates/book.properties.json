@@ -1,4 +1,4 @@
 {
-  "name": "cvxgrp Book Workflow",
-  "description": "Compile a Jupyter Book"
+  "name": "Book Workflow",
+  "description": "Compile a Jupyter Book with documentation, test reports, etc."
 }

@@ -1,5 +1,5 @@
 {
-  "name": "cvxgrp LateX Workflow",
+  "name": "LateX Workflow",
   "description": "Compile a LateX document",
   "categories": ["TeX", "PDF"],
   "filePatterns": ["*.tex"]

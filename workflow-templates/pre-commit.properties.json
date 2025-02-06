@@ -1,4 +1,4 @@
 {
-  "name": "cvxgrp pre-commit Workflow",
+  "name": "pre-commit Workflow",
   "description": "Check pre-commit hooks and run deptry"
 }
