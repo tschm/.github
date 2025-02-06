@@ -1,7 +1,6 @@
 {
   "name": "cvxgrp LateX Workflow",
   "description": "Compile a LateX document",
-  "iconName": "document",
   "categories": ["TeX", "PDF"],
   "filePatterns": ["*.tex"],
   "questions": [
