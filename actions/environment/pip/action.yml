@@ -32,13 +32,27 @@ runs:
       uses: actions/checkout@v4
 
     # Install UV
-    - name: Install uv
+    - name: Install UV (Unix)
+      if: runner.os == 'Linux' || runner.os == 'macOS'
       shell: bash
       run: |
+        set -eo pipefail
         curl -LsSf https://astral.sh/uv/install.sh | sh
-        echo "$HOME/.local/bin" >> $GITHUB_PATH   # Add UV binary directory to PATH in GitHub Actions environment
-        export PATH="$HOME/.local/bin:$PATH"      # Add UV binary directory to PATH for the current shell session
-        uv --version  # Verify UV installation
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
+        export PATH="$HOME/.local/bin:$PATH"
+        uv --version
+        uv --help > /dev/null
+
+    - name: Install UV (Windows)
+      if: runner.os == 'Windows'
+      shell: pwsh
+      run: |
+        irm https://astral.sh/uv/install.ps1 | iex
+        $uvPath = "C:\Users\runneradmin\.local\bin"
+        Add-Content $env:GITHUB_PATH $uvPath
+        $env:Path = "$uvPath;" + $env:Path
+        uv --version
+        uv --help > $null
 
     - name: Set up Python environment with uv
       shell: bash
@@ -51,14 +65,10 @@ runs:
         # Install dependencies (install dependencies)
         uv pip install -r requirements.txt
 
-        #uv sync --all-extras --dev --frozen  # Install all dependencies (including dev dependencies)
-
     - name: Activate the environment and ensure pip is installed
       shell: bash
       working-directory: ${{ inputs.working-directory }}
       run: |
-        # Activate the virtual environment
-        # source .venv/bin/activate
         # Ensure pip is installed and up-to-date
         python -m ensurepip --upgrade
         # Confirm python and pip are from the virtual environment
