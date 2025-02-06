@@ -2,13 +2,5 @@
   "name": "cvxgrp LateX Workflow",
   "description": "Compile a LateX document",
   "categories": ["TeX", "PDF"],
-  "filePatterns": ["*.tex"],
-  "questions": [
-      {
-          "id": "tex_filename",
-          "type": "input",
-          "message": "What is your main TeX file name (include .tex extension)?",
-          "default": "paper.tex"
-      }
-    ]
+  "filePatterns": ["*.tex"]
 }
