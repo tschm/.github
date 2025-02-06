@@ -100,4 +100,5 @@ runs:
       shell: bash
       run : |
         which pip
-        pip --version
+        echo "Pip version: "
+        python -m pip --version

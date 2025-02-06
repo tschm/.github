@@ -31,6 +31,5 @@ runs:
       shell: bash
       working-directory: ${{ inputs.working-directory }}
       run: |
-        which python
         python -m pip install --no-cache-dir deptry
         deptry ${{ inputs.source-folder }}
