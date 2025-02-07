@@ -45,8 +45,12 @@ runs:
         # Create virtual environment with uv
         uv venv --python ${{ inputs.python-version }}
         # Add venv to PATH for the current session
-        #echo ".venv/bin" >> $GITHUB_PATH
-        
+        echo ".venv/bin" >> $GITHUB_PATH
+        # Ensure pip is installed and up-to-date
+        python -m ensurepip --upgrade
+        # Confirm python and pip are from the virtual environment
+        python -m pip --version
+    
     - name: Install UV (Windows)
       if: runner.os == 'Windows'
       shell: pwsh
