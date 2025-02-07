@@ -50,6 +50,9 @@ runs:
         # Add venv to PATH for the current session
         echo ".venv/bin" >> $GITHUB_PATH
 
+        # Activate the virtual environment
+        source .venv/bin/activate
+    
         which python
         
         # Ensure pip is installed and up-to-date
