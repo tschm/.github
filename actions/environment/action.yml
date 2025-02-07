@@ -76,7 +76,19 @@ runs:
         # Add venv to PATH for the current session
         #echo ".venv/bin" >> $GITHUB_PATH
 
+        # Activate the virtual environment
+        $env:VIRTUAL_ENV = ".venv"
+        $env:PATH = ".venv\Scripts;" + $env:PATH
+        $env:PYTHONHOME = ".venv"
+    
+        # Verify Python and pip in the virtual environment
         which python
+
+        # Ensure pip is installed and up-to-date
+        python -m ensurepip --upgrade
+
+        python --version
+        python -m pip --version
         
     #- name: Set up Python environment with uv
     #  shell: bash
