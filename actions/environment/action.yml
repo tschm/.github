@@ -43,21 +43,21 @@ runs:
         export PATH="$HOME/.local/bin:$PATH"
         uv --version
         uv --help > /dev/null
-        
+
         # Create virtual environment with uv
         uv venv --python ${{ inputs.python-version }}
-        
+
         # Directly modify the PATH to point to the virtual environment's bin directory
         export PATH="$PWD/.venv/bin:$PATH"
-    
+
         which python
-        
+
         # Ensure pip is installed and up-to-date
         python -m ensurepip --upgrade
-        
+
         # Confirm python and pip are from the virtual environment
         python -m pip --version
-    
+
     - name: Install UV (Windows)
       if: runner.os == 'Windows'
       shell: pwsh
@@ -77,7 +77,7 @@ runs:
         $env:VIRTUAL_ENV = ".venv"
         $env:PATH = ".venv\Scripts;" + $env:PATH
         $env:PYTHONHOME = ".venv"
-    
+
         # Verify Python and pip in the virtual environment
         which python
 
@@ -86,7 +86,7 @@ runs:
 
         python --version
         python -m pip --version
-        
+
     #- name: Set up Python environment with uv
     #  shell: bash
     #  working-directory: ${{ inputs.working-directory }}
