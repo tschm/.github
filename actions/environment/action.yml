@@ -53,10 +53,10 @@ runs:
         which python
 
         # Ensure pip is installed and up-to-date
-        python -m ensurepip --upgrade
+        #python -m ensurepip --upgrade
 
         # Confirm python and pip are from the virtual environment
-        python -m pip --version
+        #python -m pip --version
 
     # Install UV (Windows)
     - name: Install UV (Windows)
@@ -80,11 +80,11 @@ runs:
         where python
 
         # Ensure pip is installed and up-to-date
-        python -m ensurepip --upgrade
+        #python -m ensurepip --upgrade
 
         # Check Python and pip version
-        python --version
-        python -m pip --version
+        #python --version
+        #python -m pip --version
 
     #- name: Set up Python environment with uv
     #  shell: bash
@@ -123,11 +123,11 @@ runs:
         # Sync environment (install dependencies)
         uv pip install -r requirements.txt
 
-    #- name: Activate the environment and ensure pip is installed
-    #  shell: bash
-    #  working-directory: ${{ inputs.working-directory }}
-    #  run: |
-    #    # Ensure pip is installed and up-to-date
-    #    python -m ensurepip --upgrade
-    #    # Confirm python and pip are from the virtual environment
-    #    python -m pip --version
+    - name: Activate the environment and ensure pip is installed
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: |
+        # Ensure pip is installed and up-to-date
+        python -m ensurepip --upgrade
+        # Confirm python and pip are from the virtual environment
+        python -m pip --version
