@@ -53,7 +53,7 @@ runs:
         which python
 
         # Ensure pip is installed and up-to-date
-        python -m ensurepip --upgrade
+        python -m pip install --upgrade pip
 
         # Confirm python and pip are from the virtual environment
         python -m pip --version
@@ -123,11 +123,11 @@ runs:
         # Sync environment (install dependencies)
         uv pip install -r requirements.txt
 
-    - name: Activate the environment and ensure pip is installed
-      shell: bash
-      working-directory: ${{ inputs.working-directory }}
-      run: |
+    #- name: Activate the environment and ensure pip is installed
+    #  shell: bash
+    #  working-directory: ${{ inputs.working-directory }}
+    #  run: |
         # Ensure pip is installed and up-to-date
-        python -m ensurepip --upgrade
+        # python -m ensurepip --upgrade
         # Confirm python and pip are from the virtual environment
-        python -m pip --version
+        #python -m pip --version
