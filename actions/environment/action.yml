@@ -58,6 +58,7 @@ runs:
         # Confirm python and pip are from the virtual environment
         python -m pip --version
 
+    # Install UV (Windows)
     - name: Install UV (Windows)
       if: runner.os == 'Windows'
       shell: pwsh
@@ -68,22 +69,20 @@ runs:
         $env:Path = "$uvPath;" + $env:Path
         uv --version
         uv --help > $null
+    
         # Create virtual environment with uv
         uv venv --python ${{ inputs.python-version }}
-        # Add venv to PATH for the current session
-        #echo ".venv/bin" >> $GITHUB_PATH
-
-        # Activate the virtual environment
-        $env:VIRTUAL_ENV = ".venv"
+        
+        # Modify the PATH to include the virtual environment's Scripts directory
         $env:PATH = ".venv\Scripts;" + $env:PATH
-        $env:PYTHONHOME = ".venv"
-
-        # Verify Python and pip in the virtual environment
-        which python
-
+        
+        # Verify that the correct Python is being used
+        where python
+    
         # Ensure pip is installed and up-to-date
         python -m ensurepip --upgrade
-
+    
+        # Check Python and pip version
         python --version
         python -m pip --version
 
