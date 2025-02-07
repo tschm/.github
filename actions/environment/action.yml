@@ -39,35 +39,21 @@ runs:
         set -eo pipefail
         curl -LsSf https://astral.sh/uv/install.sh | sh
         echo "$HOME/.local/bin" >> $GITHUB_PATH
-        # Add uv to PATH
-        export PATH="$HOME/.local/bin:$PATH"
+        echo "${{ github.workspace }}/.venv/bin" >> $GITHUB_PATH
+
+        # Add uv and .venv to PATH
+        # export PATH="${{ github.workspace }}/.venv/bin:$HOME/.local/bin:$PATH"
 
         # Verify uv installation
-        uv --version
-        uv --help > /dev/null
-
-        # Create virtual environment with uv
-        uv venv --python ${{ inputs.python-version }}
+        #uv --version
+        #uv --help > /dev/null
 
         # Ensure the venv/bin is first in the PATH
-        export PATH="$PWD/.venv/bin:$PATH"
         unset PYTHONHOME  # Unset the PYTHONHOME environment variable
                           # if set to avoid any system Python fallback
 
-        # Verify that only the virtual environment's Python is being used
-        which python  # This should show .venv/bin/python
 
-        # Ensure pip is installed and up-to-date
-        python -m ensurepip --upgrade
-        
-        # Upgrade pip in the virtual environment
-        # python -m pip install --upgrade pip
-
-        # Confirm the Python and pip versions from the virtual environment
-        python --version
-        python -m pip --version
-
-    # Install UV (Windows)
+      # Install UV (Windows)
     - name: Install UV (Windows)
       if: runner.os == 'Windows'
       shell: pwsh
@@ -75,34 +61,27 @@ runs:
         irm https://astral.sh/uv/install.ps1 | iex
         $uvPath = "C:\Users\runneradmin\.local\bin"
         Add-Content $env:GITHUB_PATH $uvPath
-        $env:Path = "$uvPath;" + $env:Path
-        uv --version
-        uv --help > $null
 
+        # GITHUB_PATH works for other jobs. The path is set here...
+        # export PATH="$HOME/.local/bin:$PATH"
+
+        #.local\bin\uv --version
+        #.local\bin\uv --help > $null
+
+        # Modify PATH to only include the virtual environment's Scripts directory
+        Add-Content $env:GITHUB_PATH ${{ github.workspace }}\.venv\Scripts
+
+        # Unset PYTHONHOME to avoid any system Python being used
+        Remove-Item -Path Env:PYTHONHOME -ErrorAction SilentlyContinue
+
+    - name: Install pip and create venv
+      shell: bash
+      run: |
         # Create virtual environment with uv
         uv venv --python ${{ inputs.python-version }}
 
-        # Modify the PATH to include the virtual environment's Scripts directory
-        $env:PATH = ".venv\Scripts;" + $env:PATH
-
-        # Verify that the correct Python is being used
-        where python
-
-        # Ensure pip is installed and up-to-date
+        # Ensure pip is installed and up-to-date in the virtual environment
         python -m ensurepip --upgrade
-
-        # Check Python and pip version
-        python --version
-        python -m pip --version
-
-    #- name: Set up Python environment with uv
-    #  shell: bash
-    #  working-directory: ${{ inputs.working-directory }}
-    #  run: |
-    #    # Create virtual environment with uv
-    #    uv venv --python ${{ inputs.python-version }}
-    #    # Add venv to PATH for the current session
-    #    echo ".venv/bin" >> $GITHUB_PATH
 
     - name: Check dependency file compatibility
       shell: bash
@@ -117,26 +96,14 @@ runs:
       if: hashFiles('pyproject.toml') != ''
       shell: bash
       run : |
-        which uv
-        uv --version
         # Sync environment (install dependencies)
         uv sync --all-extras --dev --frozen  # Install all dependencies (including dev dependencies)
+
 
     # run if the file pyproject.toml exists
     - name: Install the dependencies
       if: hashFiles('requirements.txt') != ''
       shell: bash
       run : |
-        which uv
-        uv --version
         # Sync environment (install dependencies)
-        uv pip install -r requirements.txt
-
-    #- name: Activate the environment and ensure pip is installed
-    #  shell: bash
-    #  working-directory: ${{ inputs.working-directory }}
-    #  run: |
-        # Ensure pip is installed and up-to-date
-        # python -m ensurepip --upgrade
-        # Confirm python and pip are from the virtual environment
-        #python -m pip --version
+        pip install -r requirements.txt
