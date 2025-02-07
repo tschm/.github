@@ -80,11 +80,11 @@ runs:
         where python
 
         # Ensure pip is installed and up-to-date
-        #python -m ensurepip --upgrade
+        python -m ensurepip --upgrade
 
         # Check Python and pip version
-        #python --version
-        #python -m pip --version
+        python --version
+        python -m pip --version
 
     #- name: Set up Python environment with uv
     #  shell: bash
