@@ -42,7 +42,11 @@ runs:
         export PATH="$HOME/.local/bin:$PATH"
         uv --version
         uv --help > /dev/null
-
+        # Create virtual environment with uv
+        uv venv --python ${{ inputs.python-version }}
+        # Add venv to PATH for the current session
+        #echo ".venv/bin" >> $GITHUB_PATH
+        
     - name: Install UV (Windows)
       if: runner.os == 'Windows'
       shell: pwsh
@@ -53,15 +57,19 @@ runs:
         $env:Path = "$uvPath;" + $env:Path
         uv --version
         uv --help > $null
-
-    - name: Set up Python environment with uv
-      shell: bash
-      working-directory: ${{ inputs.working-directory }}
-      run: |
         # Create virtual environment with uv
         uv venv --python ${{ inputs.python-version }}
         # Add venv to PATH for the current session
-        echo ".venv/bin" >> $GITHUB_PATH
+        #echo ".venv/bin" >> $GITHUB_PATH
+        
+    #- name: Set up Python environment with uv
+    #  shell: bash
+    #  working-directory: ${{ inputs.working-directory }}
+    #  run: |
+    #    # Create virtual environment with uv
+    #    uv venv --python ${{ inputs.python-version }}
+    #    # Add venv to PATH for the current session
+    #    echo ".venv/bin" >> $GITHUB_PATH
 
     - name: Check dependency file compatibility
       shell: bash
@@ -84,6 +92,8 @@ runs:
       if: hashFiles('requirements.txt') != ''
       shell: bash
       run : |
+        which uv
+        uv --version
         # Sync environment (install dependencies)
         uv pip install -r requirements.txt
 
