@@ -41,25 +41,25 @@ runs:
         echo "$HOME/.local/bin" >> $GITHUB_PATH
         # Add uv to PATH
         export PATH="$HOME/.local/bin:$PATH"
-        
+
         # Verify uv installation
         uv --version
         uv --help > /dev/null
-    
+
         # Create virtual environment with uv
         uv venv --python ${{ inputs.python-version }}
-        
+
         # Ensure the venv/bin is first in the PATH
         export PATH="$PWD/.venv/bin:$PATH"
-        unset PYTHONHOME  # Unset the PYTHONHOME environment variable 
+        unset PYTHONHOME  # Unset the PYTHONHOME environment variable
                           # if set to avoid any system Python fallback
-        
+
         # Verify that only the virtual environment's Python is being used
         which python  # This should show .venv/bin/python
-        
+
         # Upgrade pip in the virtual environment
         python -m pip install --upgrade pip
-        
+
         # Confirm the Python and pip versions from the virtual environment
         python --version
         python -m pip --version
