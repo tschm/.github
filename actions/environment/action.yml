@@ -31,7 +31,7 @@ runs:
     - name: Checkout [${{ github.repository }}]
       uses: actions/checkout@v4
 
-    # Install UV
+    # Install UV (Unix)
     - name: Install UV (Unix)
       if: runner.os == 'Linux' || runner.os == 'macOS'
       shell: bash
@@ -39,23 +39,29 @@ runs:
         set -eo pipefail
         curl -LsSf https://astral.sh/uv/install.sh | sh
         echo "$HOME/.local/bin" >> $GITHUB_PATH
-        # add uv to path
+        # Add uv to PATH
         export PATH="$HOME/.local/bin:$PATH"
+        
+        # Verify uv installation
         uv --version
         uv --help > /dev/null
-
+    
         # Create virtual environment with uv
         uv venv --python ${{ inputs.python-version }}
-
-        # Directly modify the PATH to point to the virtual environment's bin directory
+        
+        # Ensure the venv/bin is first in the PATH
         export PATH="$PWD/.venv/bin:$PATH"
-
-        which python
-
-        # Ensure pip is installed and up-to-date
+        unset PYTHONHOME  # Unset the PYTHONHOME environment variable 
+                          # if set to avoid any system Python fallback
+        
+        # Verify that only the virtual environment's Python is being used
+        which python  # This should show .venv/bin/python
+        
+        # Upgrade pip in the virtual environment
         python -m pip install --upgrade pip
-
-        # Confirm python and pip are from the virtual environment
+        
+        # Confirm the Python and pip versions from the virtual environment
+        python --version
         python -m pip --version
 
     # Install UV (Windows)
