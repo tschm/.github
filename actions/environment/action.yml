@@ -75,6 +75,8 @@ runs:
         uv venv --python ${{ inputs.python-version }}
         # Add venv to PATH for the current session
         #echo ".venv/bin" >> $GITHUB_PATH
+
+        which python
         
     #- name: Set up Python environment with uv
     #  shell: bash
