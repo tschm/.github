@@ -53,10 +53,10 @@ runs:
         which python
 
         # Ensure pip is installed and up-to-date
-        #python -m ensurepip --upgrade
+        python -m ensurepip --upgrade
 
         # Confirm python and pip are from the virtual environment
-        #python -m pip --version
+        python -m pip --version
 
     # Install UV (Windows)
     - name: Install UV (Windows)
