@@ -57,8 +57,11 @@ runs:
         # Verify that only the virtual environment's Python is being used
         which python  # This should show .venv/bin/python
 
+        # Ensure pip is installed and up-to-date
+        python -m ensurepip --upgrade
+        
         # Upgrade pip in the virtual environment
-        python -m pip install --upgrade pip
+        # python -m pip install --upgrade pip
 
         # Confirm the Python and pip versions from the virtual environment
         python --version
