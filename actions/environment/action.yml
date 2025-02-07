@@ -48,7 +48,7 @@ runs:
         uv venv --python ${{ inputs.python-version }}
         
         # Directly modify the PATH to point to the virtual environment's bin directory
-        export PATH=".venv/bin:$PATH"
+        export PATH="$PWD/.venv/bin:$PATH"
     
         which python
         
