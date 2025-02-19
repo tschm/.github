@@ -10,6 +10,11 @@ inputs:
     required: false
     default: 'true'
 
+outputs:
+  tag:
+    description: 'A new tag'
+    value: ${{ steps.tag_version.outputs.new_tag }}
+
 runs:
   using: "composite"
   steps:
@@ -54,7 +59,6 @@ runs:
       if: inputs.build_package == 'true'
       shell: bash
       run: |
-        echo "Building package for version: ${{ steps.tag_version.outputs.new_tag }}"
         hatch build
 
     # -----------------------------------------------------------------------------
@@ -85,3 +89,8 @@ runs:
       with:
         tag_name: ${{ steps.tag_version.outputs.new_tag }}
         generate_release_notes: true
+
+    - name: Debug Output Tag
+      shell: bash
+      run: |
+          echo "DEBUG: ${{ steps.tag_version.outputs.new_tag }}"
