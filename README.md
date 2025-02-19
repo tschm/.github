@@ -76,15 +76,15 @@ jobs:
       pre-commit:
         runs-on: ubuntu-latest
         steps:
-          - uses: cvxgrp/.github/actions/pre-commit@v2.1.1
+          - uses: cvxgrp/.github/actions/pre-commit@v2.2.4
 
   test:
     runs-on: ubuntu-latest
     steps:
     - name: "Build the virtual environment for ${{ github.repository }}"
-      uses: cvxgrp/.github/actions/uv/environment@v2.1.1
+      uses: cvxgrp/.github/actions/environment@v2.2.4
 
-    - uses: cvxgrp/.github/actions/coverage@v2.1.1
+    - uses: cvxgrp/.github/actions/coverage@v2.2.4
       with:
         coveralls: 'true'
 ```
