@@ -84,9 +84,11 @@ runs:
       shell: bash
       run : |
         # Sync environment (install dependencies)
-        echo "Hello World"
-        uv sync --all-extras --dev --frozen  # Install all dependencies (including dev dependencies)
-
+        if [ -f "uv.lock" ]; then
+            uv sync --all-extras --dev --frozen  # Install all dependencies (including dev dependencies)
+        else
+            uv sync --all-extras --dev  # Install all dependencies (including dev dependencies)
+        fi
 
     # run if the file pyproject.toml exists
     - name: Install the dependencies
