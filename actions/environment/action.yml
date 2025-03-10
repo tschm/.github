@@ -63,9 +63,6 @@ runs:
         # Create virtual environment with uv
         uv venv --python ${{ inputs.python-version }}
 
-        # Ensure pip is installed and up-to-date in the virtual environment
-        python -m ensurepip --upgrade
-
     - name: Check dependency file compatibility
       shell: bash
       run: |
@@ -86,6 +83,9 @@ runs:
             uv sync --all-extras --dev  # Install all dependencies (including dev dependencies)
         fi
 
+        # Reinstall pip if needed (since uv sync removes it)
+        uv pip install pip
+
     # run if the file pyproject.toml exists
     - name: Install the dependencies
       if: hashFiles('requirements.txt') != ''
@@ -93,3 +93,6 @@ runs:
       run : |
         cat requirements.txt
         uv pip install -r requirements.txt
+
+        # (Re)install pip if needed
+        uv pip install pip
